@@ -4,12 +4,16 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CityResource\Pages;
 use App\Models\City;
-use Filament\Forms;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Columns\BooleanColumn;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -27,44 +31,44 @@ class CityResource extends Resource
         return __('filament.resources.city.singular_label');
     }
 
-    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-building-office';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Section::make(__('filament.sections.general_info'))
                     ->schema([
-                        Forms\Components\TextInput::make('name')
+                        TextInput::make('name')
                             ->label(__('filament.labels.name'))
                             ->required()
                             ->unique(ignoreRecord: true),
-                        Forms\Components\TextInput::make('title')
+                        TextInput::make('title')
                             ->label(__('filament.labels.branch_name')),
-                        Forms\Components\TextInput::make('address')
+                        TextInput::make('address')
                             ->label(__('filament.labels.address')),
-                        Forms\Components\TextInput::make('postal_code')
+                        TextInput::make('postal_code')
                             ->label(__('filament.labels.postal_code')),
-                        Forms\Components\TextInput::make('phone')
+                        TextInput::make('phone')
                             ->label(__('filament.labels.phone')),
-                        Forms\Components\TextInput::make('nip')
+                        TextInput::make('nip')
                             ->label(__('filament.labels.nip'))
                             ->mask('999-999-99-99'),
-                        Forms\Components\TextInput::make('regon')
+                        TextInput::make('regon')
                             ->label(__('filament.labels.regon'))
                             ->minLength(9)->maxLength(14),
-                        Forms\Components\Toggle::make('active')
+                        Toggle::make('active')
                             ->label(__('filament.labels.isActive'))
                             ->required(),
                     ]),
                 Section::make(__('filament.sections.social_networks'))
                     ->schema([
-                        Forms\Components\TextInput::make('facebook')
+                        TextInput::make('facebook')
                             ->label(__('filament.labels.facebook'))
                             ->url()
                             ->prefixIcon('heroicon-o-link')
                             ->placeholder(__('filament.placeholders.facebook')),
-                        Forms\Components\TextInput::make('instagram')
+                        TextInput::make('instagram')
                             ->label(__('filament.labels.instagram'))
                             ->url()
                             ->prefixIcon('heroicon-o-camera')
@@ -91,19 +95,20 @@ class CityResource extends Resource
                     ->label(__('filament.labels.nip')),
                 TextColumn::make('regon')
                     ->label(__('filament.labels.regon')),
-                BooleanColumn::make('active')
+                IconColumn::make('active')
+                    ->boolean()
                     ->label(__('filament.labels.isActive')),
             ])
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

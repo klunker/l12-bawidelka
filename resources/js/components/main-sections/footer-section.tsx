@@ -1,5 +1,5 @@
 'use client';
-import Logotype from '@assets/images/logo_bawidelka.png';
+import Logotype from '@images/logo_bawidelka.png';
 import React from 'react';
 import FooterSectionCity from '@/components/main-sections/footer-section-city';
 import { NavLinks } from '@/components/main-sections/nav-links';

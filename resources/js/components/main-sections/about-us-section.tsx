@@ -1,6 +1,6 @@
 'use client';
 
-import AnitaAndKamila from '@assets/images/about_as.png';
+import AnitaAndKamila from '@images/about_as.png';
 import React from 'react';
 
 interface AboutContent {

@@ -4,12 +4,17 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\FaqResource\Pages;
 use App\Models\Faq;
-use Filament\Forms;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Form;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -17,7 +22,7 @@ class FaqResource extends Resource
 {
     protected static ?string $model = Faq::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-question-mark-circle';
 
     public static function getPluralModelLabel(): string
     {
@@ -29,11 +34,11 @@ class FaqResource extends Resource
         return __('filament.resources.faq.singular_label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
-                Forms\Components\TextInput::make('question')
+                TextInput::make('question')
                     ->label(__('filament.labels.question'))
                     ->required(),
                 RichEditor::make('answer')
@@ -41,10 +46,10 @@ class FaqResource extends Resource
                     ->required()
                     ->columnSpan('full')
                     ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
-                Forms\Components\Toggle::make('isActive')
+                Toggle::make('isActive')
                     ->label(__('filament.labels.isActive'))
                     ->required(),
-                Forms\Components\TextInput::make('sort_order')
+                TextInput::make('sort_order')
                     ->numeric()
                     ->default(0)
                     ->label(__('filament.labels.sort_order')),
@@ -62,20 +67,21 @@ class FaqResource extends Resource
                     ->label(__('filament.labels.sort_order'))
                     ->numeric()
                     ->sortable(),
-                BooleanColumn::make('isActive')
+                IconColumn::make('isActive')
+                    ->boolean()
                     ->label(__('filament.labels.isActive')),
             ])
             ->defaultSort('sort_order', 'asc')
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

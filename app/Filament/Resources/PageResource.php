@@ -5,21 +5,25 @@ namespace App\Filament\Resources;
 use App\Filament\Forms\SeoForm;
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
-use Filament\Forms;
-use Filament\Forms\Components\Grid;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 
 class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
     public static function getPluralModelLabel(): string
     {
@@ -31,31 +35,26 @@ class PageResource extends Resource
         return __('filament.resources.page.singular_label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Grid::make(2)
                     ->schema([
                         Section::make(__('filament.sections.general_info'))
                             ->columnSpan(1)
                             ->schema([
-                                Forms\Components\TextInput::make('title')
+                                TextInput::make('title')
                                     ->label(__('filament.labels.title'))
                                     ->required()
                                     ->maxLength(255)
-                                    ->live(onBlur: true)
-                                    ->afterStateUpdated(fn (
-                                        string $operation,
-                                        $state,
-                                        Forms\Set $set
-                                    ) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
-                                Forms\Components\TextInput::make('slug')
+                                    ->live(onBlur: true),
+                                TextInput::make('slug')
                                     ->label(__('filament.labels.slug'))
                                     ->required()
                                     ->unique(ignoreRecord: true)
                                     ->maxLength(255),
-                                Forms\Components\Toggle::make('is_active')
+                                Toggle::make('is_active')
                                     ->label(__('filament.labels.isActive'))
                                     ->default(true)
                                     ->required(),
@@ -80,21 +79,21 @@ class PageResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('slug')
+                TextColumn::make('slug')
                     ->label(__('filament.labels.slug'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                     ->label(__('filament.labels.title'))
                     ->searchable(),
-                Tables\Columns\IconColumn::make('is_active')
+                IconColumn::make('is_active')
                     ->label(__('filament.labels.isActive'))
                     ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->label(__('filament.labels.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->label(__('filament.labels.updated_at'))
                     ->dateTime()
                     ->sortable()
@@ -103,12 +102,12 @@ class PageResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

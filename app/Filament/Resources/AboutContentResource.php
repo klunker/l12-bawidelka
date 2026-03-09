@@ -4,13 +4,15 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AboutContentResource\Pages;
 use App\Models\AboutContent;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Columns\BooleanColumn;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -18,7 +20,7 @@ class AboutContentResource extends Resource
 {
     protected static ?string $model = AboutContent::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string|null|\BackedEnum $navigationIcon = 'heroicon-o-document-text';
 
     public static function getNavigationGroup(): string
     {
@@ -35,9 +37,9 @@ class AboutContentResource extends Resource
         return __('filament.resources.about_content.singular_label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Section::make(__('filament.sections.about_content'))
                     ->schema([
@@ -64,19 +66,20 @@ class AboutContentResource extends Resource
                     ->label(__('filament.labels.content'))
                     ->limit(50)
                     ->searchable(),
-                BooleanColumn::make('isActive')
+                IconColumn::make('isActive')
+                    ->boolean()
                     ->label(__('filament.labels.isActive'))
                     ->sortable(),
             ])
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

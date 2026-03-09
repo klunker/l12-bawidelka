@@ -40,7 +40,7 @@ class WelcomeController extends Controller
                 return Partner::active()->orderBy('order')->get();
             }),
             'Activities' => Cache::rememberForever(ActivityCacheKey::ACTIVE->value, function () {
-                return Activity::active()->orderBy('order')->get();
+                return Activity::with('cities')->active()->orderBy('order')->get();
             }),
             'Services' => Cache::rememberForever(ServiceCacheKey::ACTIVE->value, function () {
                 return Service::with('cities')->active()->orderBy('services.sort_order')->get();

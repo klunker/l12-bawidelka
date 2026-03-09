@@ -4,11 +4,17 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\GoogleReviewResource\Pages;
 use App\Models\GoogleReview;
-use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\BooleanColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -27,28 +33,28 @@ class GoogleReviewResource extends Resource
         return __('filament.resources.google_review.singular_label');
     }
 
-    protected static ?string $navigationIcon = 'heroicon-o-star';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-star';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
-                Forms\Components\TextInput::make('author_name')
+                TextInput::make('author_name')
                     ->label(__('filament.labels.author_name'))
                     ->required(),
-                Forms\Components\TextInput::make('rating')
+                TextInput::make('rating')
                     ->label(__('filament.labels.rating'))
                     ->numeric()
                     ->required(),
-                Forms\Components\Textarea::make('text')
+                Textarea::make('text')
                     ->label(__('filament.labels.text'))
                     ->columnSpan('full'),
-                Forms\Components\Toggle::make('is_active')
+                Toggle::make('is_active')
                     ->label(__('filament.labels.isActive'))
                     ->required(),
-                Forms\Components\TextInput::make('relative_time_description')
+                TextInput::make('relative_time_description')
                     ->label(__('filament.labels.relative_time')),
-                Forms\Components\TextInput::make('time')
+                TextInput::make('time')
                     ->label(__('filament.labels.time'))
                     ->numeric(),
             ]);
@@ -72,19 +78,20 @@ class GoogleReviewResource extends Resource
                     ->limit(50),
                 TextColumn::make('relative_time_description')
                     ->label(__('filament.labels.relative_time')),
-                BooleanColumn::make('is_active')
+                IconColumn::make('is_active')
+                    ->boolean()
                     ->label(__('filament.labels.isActive')),
             ])
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

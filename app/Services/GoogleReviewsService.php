@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Log;
 
 class GoogleReviewsService
 {
-    protected string $apiKey;
+    protected ?string $apiKey;
 
-    protected string $placeId;
+    protected ?string $placeId;
 
     public function __construct()
     {

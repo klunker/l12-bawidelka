@@ -4,17 +4,22 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServiceResource\Pages;
 use App\Models\Service;
-use Filament\Forms;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Columns\BooleanColumn;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -24,7 +29,7 @@ class ServiceResource extends Resource
 {
     protected static ?string $model = Service::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getPluralModelLabel(): string
     {
@@ -36,40 +41,38 @@ class ServiceResource extends Resource
         return __('filament.resources.service.singular_label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Grid::make(3)
                     ->schema([
                         Section::make(__('filament.sections.general_info'))
                             ->columnSpan(2)
                             ->schema([
-                                Forms\Components\TextInput::make('title')
+                                TextInput::make('title')
                                     ->label(__('filament.labels.title'))
                                     ->required()
                                     ->maxLength(255)
                                     ->live(onBlur: true)
-                                    ->afterStateUpdated(fn (
-                                        string $operation,
-                                        $state,
-                                        Forms\Set $set
-                                    ) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
-                                Forms\Components\TextInput::make('slug')
+                                    ->afterStateUpdated(function (string $state, Set $set) {
+                                        $set('slug', Str::slug($state));
+                                    }),
+                                TextInput::make('slug')
                                     ->label(__('filament.labels.slug'))
                                     ->required()
                                     ->unique(ignoreRecord: true)
                                     ->maxLength(255)
                                     ->hidden(fn (string $operation): bool => $operation === 'create'),
-                                Forms\Components\TextInput::make('sub_title')
+                                TextInput::make('sub_title')
                                     ->label(__('filament.labels.sub_title'))
                                     ->nullable()
                                     ->maxLength(255),
-                                Forms\Components\Toggle::make('isActive')
+                                Toggle::make('isActive')
                                     ->label(__('filament.labels.isActive'))
                                     ->required()
                                     ->inline(false),
-                                Forms\Components\TextInput::make('sort_order')
+                                TextInput::make('sort_order')
                                     ->label(__('filament.labels.sort_order'))
                                     ->numeric()
                                     ->default(0),
@@ -104,7 +107,7 @@ class ServiceResource extends Resource
                                     ->disk('public')
                                     ->directory('services/headers')
                                     ->visibility('public'),
-                                Forms\Components\Select::make('cities')
+                                Select::make('cities')
                                     ->label(__('filament.labels.cities'))
                                     ->multiple()
                                     ->relationship('cities', 'name')
@@ -133,7 +136,7 @@ class ServiceResource extends Resource
                         Repeater::make('options')
                             ->label(__('filament.labels.options'))
                             ->simple(
-                                Forms\Components\TextInput::make('value')
+                                TextInput::make('value')
                                     ->hiddenLabel()
                                     ->required(),
                             )
@@ -151,7 +154,7 @@ class ServiceResource extends Resource
                                     ->downloadable()
                                     ->label(__('filament.labels.file'))
                                     ->columnSpan(1),
-                                Forms\Components\TextInput::make('name')
+                                TextInput::make('name')
                                     ->required()
                                     ->label(__('filament.labels.file_name'))
                                     ->columnSpan(3),
@@ -195,18 +198,19 @@ class ServiceResource extends Resource
                     ->label(__('filament.labels.sort_order'))
                     ->sortable()
                     ->toggleable(),
-                BooleanColumn::make('isActive')
+                IconColumn::make('isActive')
+                    ->boolean()
                     ->label(__('filament.labels.isActive'))
                     ->sortable(),
             ])
             ->defaultSort('sort_order', 'asc')
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

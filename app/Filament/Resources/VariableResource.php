@@ -4,10 +4,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\VariableResource\Pages;
 use App\Models\Variable;
-use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -25,18 +29,18 @@ class VariableResource extends Resource
         return __('filament.resources.variable.singular_label');
     }
 
-    protected static ?string $navigationIcon = 'heroicon-o-variable';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-variable';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
-                Forms\Components\Textarea::make('description')
+                Textarea::make('description')
                     ->label(__('filament.labels.description'))
                     ->disabledOn('edit'),
-                Forms\Components\Textarea::make('value')
+                Textarea::make('value')
                     ->label(__('filament.labels.value')),
-                Forms\Components\TextInput::make('key')
+                TextInput::make('key')
                     ->label(__('filament.labels.key'))
                     ->disabledOn('edit')
                     ->required()
@@ -61,13 +65,13 @@ class VariableResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

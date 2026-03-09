@@ -4,14 +4,18 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReasonResource\Pages;
 use App\Models\Reason;
-use Filament\Forms;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Form;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Columns\BooleanColumn;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -20,7 +24,7 @@ class ReasonResource extends Resource
 {
     protected static ?string $model = Reason::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-light-bulb';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-light-bulb';
 
     public static function getPluralModelLabel(): string
     {
@@ -32,11 +36,11 @@ class ReasonResource extends Resource
         return __('filament.resources.reason.singular_label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
-                Forms\Components\TextInput::make('title')
+                TextInput::make('title')
                     ->label(__('filament.labels.title'))
                     ->required(),
                 RichEditor::make('description')
@@ -52,7 +56,7 @@ class ReasonResource extends Resource
                     ->visibility('public'),
                 KeyValue::make('attachments')
                     ->label(__('filament.labels.attachments')),
-                Forms\Components\Toggle::make('isActive')
+                Toggle::make('isActive')
                     ->label(__('filament.labels.isActive'))
                     ->required(),
             ]);
@@ -67,19 +71,20 @@ class ReasonResource extends Resource
                 TextColumn::make('title')
                     ->label(__('filament.labels.title'))
                     ->searchable(),
-                BooleanColumn::make('isActive')
+                IconColumn::make('isActive')
+                    ->boolean()
                     ->label(__('filament.labels.isActive')),
             ])
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

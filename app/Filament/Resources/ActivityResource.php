@@ -4,16 +4,21 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ActivityResource\Pages;
 use App\Models\Activity;
-use Filament\Forms;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Form;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -24,7 +29,7 @@ class ActivityResource extends Resource
 {
     protected static ?string $model = Activity::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-sparkles';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-sparkles';
 
     public static function getPluralModelLabel(): string
     {
@@ -36,30 +41,30 @@ class ActivityResource extends Resource
         return __('filament.resources.activity.singular_label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Grid::make(3)
                     ->schema([
                         Section::make(__('filament.sections.general_info'))
                             ->columnSpan(2)
                             ->schema([
-                                Forms\Components\TextInput::make('name')
+                                TextInput::make('name')
                                     ->label(__('filament.labels.name'))
                                     ->required()
                                     ->live(onBlur: true)
                                     ->afterStateUpdated(fn (
                                         string $operation,
                                         $state,
-                                        Forms\Set $set
+                                        Set $set
                                     ) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
-                                Forms\Components\TextInput::make('slug')
+                                TextInput::make('slug')
                                     ->label(__('filament.labels.slug'))
                                     ->required()
                                     ->unique(ignoreRecord: true)
                                     ->helperText('Slug will be auto-generated from name'),
-                                Forms\Components\TextInput::make('badge')
+                                TextInput::make('badge')
                                     ->label(__('filament.labels.badge')),
                                 Select::make('color')
                                     ->label(__('filament.labels.color'))
@@ -74,7 +79,7 @@ class ActivityResource extends Resource
                                     ])
                                     ->required()
                                     ->native(false),
-                                Forms\Components\Toggle::make('isActive')
+                                Toggle::make('isActive')
                                     ->label(__('filament.labels.isActive'))
                                     ->required(),
                             ]),
@@ -90,7 +95,7 @@ class ActivityResource extends Resource
                                     ->disk('public')
                                     ->directory('activities')
                                     ->visibility('public'),
-                                Forms\Components\Select::make('cities')
+                                Select::make('cities')
                                     ->label(__('filament.labels.cities'))
                                     ->multiple()
                                     ->relationship('cities', 'name')
@@ -103,12 +108,12 @@ class ActivityResource extends Resource
                             ->schema([
                                 Grid::make(2)
                                     ->schema([
-                                        Forms\Components\TextInput::make('duration')
+                                        TextInput::make('duration')
                                             ->label(__('filament.labels.duration'))
                                             ->required()
                                             ->integer()
                                             ->suffix('min'),
-                                        Forms\Components\TextInput::make('order')
+                                        TextInput::make('order')
                                             ->label(__('filament.labels.order'))
                                             ->required()
                                             ->integer(),
@@ -119,17 +124,17 @@ class ActivityResource extends Resource
                             ->schema([
                                 Grid::make(3)
                                     ->schema([
-                                        Forms\Components\TextInput::make('price')
+                                        TextInput::make('price')
                                             ->label(__('filament.labels.price'))
                                             ->required()
                                             ->numeric()
                                             ->prefix('PLN'),
-                                        Forms\Components\TextInput::make('weekendPrice')
+                                        TextInput::make('weekendPrice')
                                             ->label(__('filament.labels.weekend_price'))
                                             ->required()
                                             ->numeric()
                                             ->prefix('PLN'),
-                                        Forms\Components\TextInput::make('extra_price')
+                                        TextInput::make('extra_price')
                                             ->label(__('filament.labels.extra_price'))
                                             ->nullable()
                                             ->numeric()
@@ -141,19 +146,19 @@ class ActivityResource extends Resource
                             ->schema([
                                 Grid::make(2)
                                     ->schema([
-                                        Forms\Components\TextInput::make('ageFrom')
+                                        TextInput::make('ageFrom')
                                             ->label(__('filament.labels.age_from'))
                                             ->required()
                                             ->integer(),
-                                        Forms\Components\TextInput::make('ageTo')
+                                        TextInput::make('ageTo')
                                             ->label(__('filament.labels.age_to'))
                                             ->required()
                                             ->integer(),
-                                        Forms\Components\TextInput::make('numChildren')
+                                        TextInput::make('numChildren')
                                             ->label(__('filament.labels.num_children'))
                                             ->required()
                                             ->integer(),
-                                        Forms\Components\TextInput::make('maxChildren')
+                                        TextInput::make('maxChildren')
                                             ->label(__('filament.labels.max_children'))
                                             ->required()
                                             ->integer(),
@@ -171,7 +176,7 @@ class ActivityResource extends Resource
                         Repeater::make('features')
                             ->label(__('filament.labels.features'))
                             ->simple(
-                                Forms\Components\TextInput::make('value')
+                                TextInput::make('value')
                                     ->hiddenLabel()
                                     ->required(),
                             )
@@ -215,13 +220,13 @@ class ActivityResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

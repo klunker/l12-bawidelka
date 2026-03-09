@@ -6,7 +6,7 @@ use App\Models\Activity;
 use App\Models\Service;
 use App\Observers\ActivityObserver;
 use App\Observers\ServiceObserver;
-use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
+use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use Carbon\CarbonImmutable;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;

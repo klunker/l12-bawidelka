@@ -99,7 +99,6 @@ const ActivityCard: React.FC<{ activity: Activity }> = ({ activity }) => {
 
     const theme = themeColors[colorClass] || themeColors.mint;
 
-    console.log('Activity', activity);
     return (
         <div
             className={`flex h-full flex-col overflow-hidden rounded-4xl border bg-white ${theme.border} group shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]`}

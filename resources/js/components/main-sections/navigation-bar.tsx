@@ -1,6 +1,6 @@
 'use client';
 
-import bawidelkaLogo from '@assets/images/bawidelka.svg';
+import bawidelkaLogo from '@images/bawidelka.svg';
 import { Link } from '@inertiajs/react';
 import { Button } from '@radix-ui/themes';
 import { Menu, Phone, X } from 'lucide-react';
