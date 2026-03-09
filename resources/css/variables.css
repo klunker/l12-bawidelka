@@ -1,0 +1,130 @@
+@theme {
+    /* Fonts */
+    --font-anton: 'Anton', sans-serif;
+    --font-display: 'Vend Sans', sans-serif;
+
+    /* Brand Colors */
+    --brand-color-pink-pounder: #f0bfd5;
+    --brand-color-brown: #885f45;
+    --brand-color-mint: #d6ebcc;
+    --brand-color-peach: #f4d9d7;
+    --brand-color-pistachio: #dde5bf;
+    --brand-color-lavender: #d8cee1;
+
+    /* Brown palette */
+    --color-brown-50: #f3e9e5;
+    --color-brown-100: #e7d3c8;
+    --color-brown-200: #d1a996;
+    --color-brown-300: #bb826c;
+    --color-brown-400: #a46a54;
+    --color-brown-500: #8b5e4d;
+    --color-brown-600: #714b3d;
+    --color-brown-700: #593c30;
+    --color-brown-800: #3e2820;
+    --color-brown-900: #241612;
+
+    /* Fuchsia palette */
+    --color-fuchsia-50: #f8eaf1;
+    --color-fuchsia-100: #f1d4e2;
+    --color-fuchsia-200: #e6aec8;
+    --color-fuchsia-300: #d887af;
+    --color-fuchsia-400: #c96a9c;
+    --color-fuchsia-500: #b66d91;
+    --color-fuchsia-600: #945373;
+    --color-fuchsia-700: #733f58;
+    --color-fuchsia-800: #4d2a3b;
+    --color-fuchsia-900: #2b1722;
+
+    /* Pink palette */
+    --color-pink-50: #fbf3f7;
+    --color-pink-100: #f8e5ed;
+    --color-pink-200: #f1c9db;
+    --color-pink-300: #e9aac7;
+    --color-pink-400: #e38fb5;
+    --color-pink-500: #e0afc3;
+    --color-pink-600: #c78fa5;
+    --color-pink-700: #a66f84;
+    --color-pink-800: #7b4c5c;
+    --color-pink-900: #4a2b36;
+
+    /* Cream palette */
+    --color-cream-50: #fefafa;
+    --color-cream-100: #fdf2f3;
+    --color-cream-200: #f9e2e4;
+    --color-cream-300: #f5d1d3;
+    --color-cream-400: #f1bfc2;
+    --color-cream-500: #f4d9dc;
+    --color-cream-600: #dbb8ba;
+    --color-cream-700: #ba9394;
+    --color-cream-800: #927073;
+    --color-cream-900: #594243;
+
+    /* Lavender palette */
+    --color-lavender-50: #f8f6fd;
+    --color-lavender-100: #f1eefa;
+    --color-lavender-200: rgb(242, 242, 242);
+    --color-lavender-300: #d7c8ef;
+    --color-lavender-400: #c8b4e8;
+    --color-lavender-500: #d9d2eb;
+    --color-lavender-600: #b19ec9;
+    --color-lavender-700: #8c79a5;
+    --color-lavender-800: #65547a;
+    --color-lavender-900: #3c3147;
+
+    /* Mint palette */
+    --color-mint-50: #f8fcf7;
+    --color-mint-100: #f0f8ef;
+    --color-mint-200: #e4f0e2;
+    --color-mint-300: #d6e7d4;
+    --color-mint-400: #c6dcc3;
+    --color-mint-500: #d8e8d6;
+    --color-mint-600: #b3c4b2;
+    --color-mint-700: #8da08d;
+    --color-mint-800: #637363;
+    --color-mint-900: #3a433a;
+
+    /* Violet palette */
+    --color-violet-50: #f5f3ff;
+    --color-violet-100: #ede9fe;
+    --color-violet-200: #ddd6fe;
+    --color-violet-300: #c4b5fd;
+    --color-violet-400: #a78bfa;
+    --color-violet-500: #8b5cf6;
+    --color-violet-600: #7c3aed;
+    --color-violet-700: #6d28d9;
+    --color-violet-800: #5b21b6;
+    --color-violet-900: #4c1d95;
+
+    /* Orange palette */
+    --color-orange-50: #fff7ed;
+    --color-orange-100: #ffedd5;
+    --color-orange-200: #fed7aa;
+    --color-orange-300: #fdba74;
+    --color-orange-400: #fb923c;
+    --color-orange-500: #f97316;
+    --color-orange-600: #ea580c;
+    --color-orange-700: #c2410c;
+    --color-orange-800: #9a3412;
+    --color-orange-900: #7c2d12;
+}
+
+:root {
+    /* Theme colors */
+    --primary: var(--color-mint-600);
+    --pastel-pink: #eae1dd;
+    --pastel-yellow: #f3db72;
+    --text-dark: #2d3436;
+    --text-light: #636e72;
+    --white: #ffffff;
+    --polish-red: #dc143c;
+    --polish-white: #ffffff;
+}
+
+.bawidelka {
+    color: var(--color-brown-700);
+    font-family: var(--font-anton), sans-serif;
+    font-size: 1.875rem;
+    /* 3xl = 1.875rem / 30px */
+    line-height: 2.25rem;
+    /* 3xl line height */
+}
