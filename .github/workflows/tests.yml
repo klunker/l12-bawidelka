@@ -40,13 +40,21 @@ jobs:
       - name: Install Node Dependencies
         run: npm i
 
-      - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
       - name: Copy Environment File
         run: cp .env.example .env
 
+      - name: Install Dependencies
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ":memory:"
+          CACHE_STORE: array
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
       - name: Generate Application Key
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ":memory:"
+          CACHE_STORE: array
         run: php artisan key:generate
 
       - name: Build Assets
@@ -56,4 +64,5 @@ jobs:
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: ":memory:"
+          CACHE_STORE: array
         run: ./vendor/bin/pest
