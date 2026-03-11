@@ -84,6 +84,8 @@ Create a symbolic link from `public/storage` to `storage/app/public`. This is cr
 php artisan storage:link
 ```
 
+**Note:** If the link already exists, you'll see an error message. This is normal and safe to ignore. The link ensures that files in `storage/app/public` are accessible via the web through the `public/storage` directory.
+
 ### 8. Build Frontend Assets
 
 Compile the frontend assets (React components, CSS, etc.).
@@ -93,6 +95,8 @@ npm run build
 ```
 
 ## Running the Development Server
+
+### Option 1: Local Development
 
 To run the application locally, you'll need to start both the PHP server and the Vite development server for the frontend.
 
@@ -108,7 +112,34 @@ To run the application locally, you'll need to start both the PHP server and the
     npm run dev
     ```
 
-Now you can access your application at the URL provided by `php artisan serve` (e.g., `http://localhost:8000`).
+### Option 2: Laravel Sail (Docker)
+
+This project includes Laravel Sail for Docker-based development.
+
+1.  **Start Sail containers:**
+    ```sh
+    ./vendor/bin/sail up -d
+    ```
+
+2.  **Run commands through Sail:**
+    ```sh
+    # Install dependencies
+    ./vendor/bin/sail composer install
+    ./vendor/bin/sail npm install
+    
+    # Generate key and migrate
+    ./vendor/bin/sail php artisan key:generate
+    ./vendor/bin/sail php artisan migrate
+    ./vendor/bin/sail php artisan storage:link
+    
+    # Start development server
+    ./vendor/bin/sail npm run dev
+    ```
+
+3.  **Access the application:**
+    The application will be available at `http://localhost` (configured in your `.env` file).
+
+Now you can access your application at the URL provided by the server.
 
 ## Admin Panel
 
