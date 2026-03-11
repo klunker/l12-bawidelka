@@ -1,14 +1,16 @@
 // ────────────────────────────────────────────────────────────────────────────
 // Trix config – must run BEFORE any editor initializes
 // ────────────────────────────────────────────────────────────────────────────
-let trixConfigured = false;
+if (typeof window.trixConfigured === 'undefined') {
+    window.trixConfigured = false;
+}
 
 function configureTrix() {
-    if (trixConfigured || !window.Trix) {
+    if (window.trixConfigured || !window.Trix) {
         return;
     }
 
-    trixConfigured = true;
+    window.trixConfigured = true;
 
     Trix.config.dompurify.ADD_TAGS = ['div', 'h3', 'ul', 'ol', 'li'];
     Trix.config.dompurify.ADD_ATTR = [

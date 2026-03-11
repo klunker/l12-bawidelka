@@ -17,8 +17,8 @@ use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -44,18 +44,20 @@ class ServiceResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema
+            ->columns(1)
             ->schema([
-                Grid::make(3)
+                // Row 1: Main info and media
+                Grid::make(2)
                     ->schema([
                         Section::make(__('filament.sections.general_info'))
-                            ->columnSpan(2)
+                            ->columnSpan(1)
                             ->schema([
                                 TextInput::make('title')
                                     ->label(__('filament.labels.title'))
                                     ->required()
                                     ->maxLength(255)
                                     ->live(onBlur: true)
-                                    ->afterStateUpdated(function (string $state, Set $set) {
+                                    ->afterStateUpdated(function (string $state, callable $set) {
                                         $set('slug', Str::slug($state));
                                     }),
                                 TextInput::make('slug')
@@ -115,23 +117,28 @@ class ServiceResource extends Resource
                                     ->searchable(),
                             ]),
                     ]),
-
+                // Row 2: Content
                 Section::make(__('filament.sections.content'))
+                    ->collapsible()
                     ->schema([
-                        RichEditor::make('description')
-                            ->label(__('filament.labels.description'))
-                            ->required()
-                            ->columnSpan('full')
-                            ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
-                        RichEditor::make('description_additional')
-                            ->label(__('filament.labels.description_additional'))
-                            ->nullable()
-                            ->columnSpan('full')
-                            ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;'])
-                            ->visible(fn (callable $get) => $get('template') === 'urodzinki'),
+                        Grid::make(1)
+                            ->schema([
+                                RichEditor::make('description')
+                                    ->label(__('filament.labels.description'))
+                                    ->required()
+                                    ->columnSpan(1),
+                                RichEditor::make('description_additional')
+                                    ->label(__('filament.labels.description_additional'))
+                                    ->nullable()
+                                    ->columnSpan(1)
+                                    ->visible(fn (callable $get) => $get('template') === 'urodzinki'),
+                            ]),
                     ]),
 
+                // Row 3: Additional details (only for urodzinki)
                 Section::make(__('filament.sections.additional_details'))
+                    ->collapsible()
+                    ->visible(fn (callable $get) => $get('template') === 'urodzinki')
                     ->schema([
                         Repeater::make('options')
                             ->label(__('filament.labels.options'))
@@ -141,7 +148,8 @@ class ServiceResource extends Resource
                                     ->required(),
                             )
                             ->addActionLabel(__('filament.labels.add_option'))
-                            ->reorderableWithButtons(),
+                            ->reorderableWithButtons()
+                            ->collapsible(),
 
                         Repeater::make('attachments')
                             ->label(__('filament.labels.attachments'))
@@ -158,16 +166,12 @@ class ServiceResource extends Resource
                                     ->required()
                                     ->label(__('filament.labels.file_name'))
                                     ->columnSpan(3),
-
                             ])
                             ->columns(4)
                             ->addActionLabel(__('filament.labels.add_attachment'))
                             ->reorderableWithButtons()
                             ->collapsible(),
-                    ])->collapsible()
-                    ->visible(fn (callable $get) => $get('template') === 'urodzinki'),
-                \App\Filament\Forms\SeoForm::make()
-                    ->columnSpan(2),
+                    ]),
             ]);
     }
 

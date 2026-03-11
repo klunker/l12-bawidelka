@@ -177,6 +177,9 @@ php artisan migrate --force
 # Link storage
 php artisan storage:link
 
+# Filament prepare assets
+php artisan filament:assets
+
 # Cache configuration and routes for performance
 php artisan config:cache
 php artisan route:cache
