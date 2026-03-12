@@ -54,6 +54,9 @@ jobs:
           mkdir -p database
           touch database/database.sqlite
 
+      - name: Migrate Database
+        run: php artisan migrate --force
+
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
