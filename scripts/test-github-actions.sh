@@ -30,6 +30,9 @@ run_lint() {
         -v "$PWD":/workspace \
         -w /workspace \
         -e CI=true \
+        -e DB_CONNECTION=sqlite \
+        -e DB_DATABASE=":memory:" \
+        -e CACHE_STORE=array \
         shivammathur/node:latest \
         bash -c "
             echo '📦 Installing dependencies...'
@@ -59,6 +62,9 @@ run_tests() {
         -v "$PWD":/workspace \
         -w /workspace \
         -e CI=true \
+        -e DB_CONNECTION=sqlite \
+        -e DB_DATABASE=":memory:" \
+        -e CACHE_STORE=array \
         shivammathur/node:latest \
         bash -c "
             echo '📦 Installing dependencies...'
@@ -85,6 +91,9 @@ run_tests() {
         -v "$PWD":/workspace \
         -w /workspace \
         -e CI=true \
+        -e DB_CONNECTION=sqlite \
+        -e DB_DATABASE=":memory:" \
+        -e CACHE_STORE=array \
         shivammathur/node:latest \
         bash -c "
             echo '📦 Installing dependencies...'
