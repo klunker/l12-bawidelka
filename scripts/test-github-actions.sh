@@ -27,13 +27,15 @@ run_lint() {
     print_status "🧹 Running LINT workflow..."
     
     docker run --rm \
-        -v "$PWD":/workspace \
-        -w /workspace \
+        -u root \
+        -v "$PWD":/app \
+        -w /app \
         -e CI=true \
         -e DB_CONNECTION=sqlite \
         -e DB_DATABASE=":memory:" \
         -e CACHE_STORE=array \
-        shivammathur/node:latest \
+        -e LARAVEL_SKIP_DATABASE_CHECK=1 \
+        bitnami/laravel:latest \
         bash -c "
             echo '📦 Installing dependencies...'
             composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -59,13 +61,15 @@ run_tests() {
     # Test with PHP 8.4
     print_status "Testing with PHP 8.4..."
     docker run --rm \
-        -v "$PWD":/workspace \
-        -w /workspace \
+        -u root \
+        -v "$PWD":/app \
+        -w /app \
         -e CI=true \
         -e DB_CONNECTION=sqlite \
         -e DB_DATABASE=":memory:" \
         -e CACHE_STORE=array \
-        shivammathur/node:latest \
+        -e LARAVEL_SKIP_DATABASE_CHECK=1 \
+        bitnami/laravel:latest \
         bash -c "
             echo '📦 Installing dependencies...'
             composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -88,13 +92,15 @@ run_tests() {
     # Test with PHP 8.5
     print_status "Testing with PHP 8.5..."
     docker run --rm \
-        -v "$PWD":/workspace \
-        -w /workspace \
+        -u root \
+        -v "$PWD":/app \
+        -w /app \
         -e CI=true \
         -e DB_CONNECTION=sqlite \
         -e DB_DATABASE=":memory:" \
         -e CACHE_STORE=array \
-        shivammathur/node:latest \
+        -e LARAVEL_SKIP_DATABASE_CHECK=1 \
+        bitnami/laravel:latest \
         bash -c "
             echo '📦 Installing dependencies...'
             composer install --no-interaction --prefer-dist --optimize-autoloader
