@@ -30,7 +30,7 @@ run_lint() {
         -v "$PWD":/workspace \
         -w /workspace \
         -e CI=true \
-        shivammathur/setup-php:2.0.3 \
+        shivammathur/node:latest \
         bash -c "
             echo '📦 Installing dependencies...'
             composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -59,7 +59,7 @@ run_tests() {
         -v "$PWD":/workspace \
         -w /workspace \
         -e CI=true \
-        shivammathur/setup-php:2.0.3 \
+        shivammathur/node:latest \
         bash -c "
             echo '📦 Installing dependencies...'
             composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -85,7 +85,7 @@ run_tests() {
         -v "$PWD":/workspace \
         -w /workspace \
         -e CI=true \
-        shivammathur/setup-php:2.0.3 \
+        shivammathur/node:latest \
         bash -c "
             echo '📦 Installing dependencies...'
             composer install --no-interaction --prefer-dist --optimize-autoloader
