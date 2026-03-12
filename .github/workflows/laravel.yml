@@ -35,6 +35,9 @@ jobs:
     - name: Copy .env
       run: cp .env.example .env
 
+    - name: Install Dependencies (No Scripts)
+      run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts
+
     - name: Create Database File
       run: |
         mkdir -p database
@@ -43,7 +46,7 @@ jobs:
     - name: Migrate Database
       run: php artisan migrate --force
 
-    - name: Install Dependencies
+    - name: Finalize Dependencies (With Scripts)
       run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
     - name: Install Node Dependencies
