@@ -33,7 +33,14 @@ jobs:
         node-version: '22'
 
     - name: Copy .env
-      run: cp .env.example .env
+      run: |
+        cp .env.example .env
+        sed -i 's/APP_ENV=local/APP_ENV=testing/g' .env
+        sed -i 's/DB_CONNECTION=sqlite/DB_CONNECTION=sqlite/g' .env
+        sed -i 's/# DB_DATABASE=laravel/DB_DATABASE=:memory:/g' .env
+        sed -i 's/CACHE_STORE=database/CACHE_STORE=array/g' .env
+        sed -i 's/SESSION_DRIVER=database/SESSION_DRIVER=array/g' .env
+        echo "APP_KEY=base64:u64/L+j85pQ9+J8u7k6uY9u6/n58n5o6uY9u6/n58n5o=" >> .env
 
     - name: Install Dependencies (No Scripts)
       run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts
