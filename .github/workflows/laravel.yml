@@ -44,6 +44,8 @@ jobs:
         touch database/database.sqlite
 
     - name: Migrate Database
+      env:
+        CACHE_STORE: array
       run: php artisan migrate --force
 
     - name: Finalize Dependencies (With Scripts)
