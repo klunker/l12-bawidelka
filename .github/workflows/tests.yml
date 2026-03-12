@@ -22,8 +22,8 @@ jobs:
         php-version: ['8.4', '8.5']
     env:
       DB_CONNECTION: sqlite
-      DB_DATABASE: ":memory:"
       CACHE_STORE: array
+      SESSION_DRIVER: array
       APP_ENV: testing
       APP_KEY: base64:u64/L+j85pQ9+J8u7k6uY9u6/n58n5o6uY9u6/n58n5o=
 
@@ -51,7 +51,6 @@ jobs:
           cp .env.example .env
           sed -i 's/APP_ENV=local/APP_ENV=testing/g' .env
           sed -i 's/DB_CONNECTION=sqlite/DB_CONNECTION=sqlite/g' .env
-          sed -i 's/# DB_DATABASE=laravel/DB_DATABASE=:memory:/g' .env
           sed -i 's/CACHE_STORE=database/CACHE_STORE=array/g' .env
           sed -i 's/SESSION_DRIVER=database/SESSION_DRIVER=array/g' .env
           echo "APP_KEY=base64:u64/L+j85pQ9+J8u7k6uY9u6/n58n5o6uY9u6/n58n5o=" >> .env
@@ -65,18 +64,13 @@ jobs:
           touch database/database.sqlite
 
       - name: Migrate Database
-        env:
-          CACHE_STORE: array
         run: php artisan migrate --force
-
-      - name: Finalize Dependencies (With Scripts)
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
-      - name: Generate Application Key
-        run: php artisan key:generate
 
       - name: Build Assets
         run: npm run build
+
+      - name: Finalize Dependencies (With Scripts)
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Tests
         run: ./vendor/bin/pest

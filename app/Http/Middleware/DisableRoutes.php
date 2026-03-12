@@ -10,7 +10,7 @@ class DisableRoutes
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (app()->environment('testing')) {
+        if (app()->runningUnitTests()) {
             return $next($request);
         }
 
