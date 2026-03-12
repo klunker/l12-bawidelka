@@ -7,7 +7,6 @@ This directory contains all custom utility scripts for the project.
 - `build-with-git.sh` - Git-aware build (checks updates, pulls, then builds)
 
 ## 🧪 CI/Testing Scripts  
-- `test-github-actions.sh` - Docker simulation of GitHub Actions workflows
 - `run-act.sh` - Act tool runner for GitHub Actions
 
 ## 📋 Help Scripts
@@ -24,9 +23,6 @@ npm run build:simple
 npm run build:git
 
 # CI testing
-npm run ci:lint
-npm run ci:tests
-npm run ci:all
 npm run act:lint
 npm run act:tests
 npm run act:all
