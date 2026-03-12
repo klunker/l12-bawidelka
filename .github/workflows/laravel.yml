@@ -35,6 +35,11 @@ jobs:
     - name: Copy .env
       run: cp .env.example .env
 
+    - name: Create Database File
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+
     - name: Install Dependencies
       run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
