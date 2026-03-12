@@ -66,8 +66,6 @@ class ReasonResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image')
-                    ->label(__('filament.labels.image')),
                 TextColumn::make('title')
                     ->label(__('filament.labels.title'))
                     ->searchable(),

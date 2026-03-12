@@ -179,15 +179,10 @@ class ServiceResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image')
-                    ->label(__('filament.labels.image')),
                 TextColumn::make('title')
                     ->label(__('filament.labels.title'))
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('slug')
-                    ->label(__('filament.labels.slug'))
-                    ->searchable(),
                 TextColumn::make('template')
                     ->label(__('filament.labels.template'))
                     ->badge()

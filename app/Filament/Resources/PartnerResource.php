@@ -87,15 +87,8 @@ class PartnerResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('logo')
-                    ->label(__('filament.labels.logo')),
-                ImageColumn::make('photo')
-                    ->label(__('filament.labels.photo')),
                 TextColumn::make('name')
                     ->label(__('filament.labels.name'))
-                    ->searchable(),
-                TextColumn::make('slug')
-                    ->label(__('filament.labels.slug'))
                     ->searchable(),
                 TextColumn::make('url')
                     ->label(__('filament.labels.url')),

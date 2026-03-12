@@ -191,6 +191,8 @@ class ActivityResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image')
+                    ->disk('public')
+                    ->square()
                     ->label(__('filament.labels.image')),
                 TextColumn::make('name')
                     ->label(__('filament.labels.name'))
