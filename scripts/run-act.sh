@@ -51,8 +51,7 @@ run_workflow() {
     act -j "$job_name" \
         -W "$workflow_file" \
         -P ubuntu-latest=catthehacker/ubuntu:act-latest \
-        -s GITHUB_TOKEN=your-token-here \
-        --bind
+        -s GITHUB_TOKEN=your-token-here
 }
 
 # Main execution

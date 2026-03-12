@@ -18,6 +18,7 @@ jobs:
       DB_DATABASE: ":memory:"
       CACHE_STORE: array
       APP_ENV: testing
+      APP_KEY: base64:u64/L+j85pQ9+J8u7k6uY9u6/n58n5o6uY9u6/n58n5o=
 
     steps:
     - uses: shivammathur/setup-php@v2
@@ -32,7 +33,7 @@ jobs:
         node-version: '22'
 
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: cp .env.example .env
 
     - name: Install Dependencies
       run: composer install --no-interaction --prefer-dist --optimize-autoloader

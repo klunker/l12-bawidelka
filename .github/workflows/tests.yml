@@ -25,6 +25,7 @@ jobs:
       DB_DATABASE: ":memory:"
       CACHE_STORE: array
       APP_ENV: testing
+      APP_KEY: base64:u64/L+j85pQ9+J8u7k6uY9u6/n58n5o6uY9u6/n58n5o=
 
     steps:
       - name: Checkout code
