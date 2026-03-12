@@ -35,6 +35,8 @@ run_lint() {
         -e DB_DATABASE=":memory:" \
         -e CACHE_STORE=array \
         -e LARAVEL_SKIP_DATABASE_CHECK=1 \
+        -e HOST_UID=$(id -u) \
+        -e HOST_GID=$(id -g) \
         bitnami/laravel:latest \
         bash -c "
             echo '📦 Installing dependencies...'
@@ -51,6 +53,7 @@ run_lint() {
             npm run lint
             
             echo '✅ Lint workflow completed successfully!'
+            chown -R \$HOST_UID:\$HOST_GID /app
         "
 }
 
@@ -69,6 +72,8 @@ run_tests() {
         -e DB_DATABASE=":memory:" \
         -e CACHE_STORE=array \
         -e LARAVEL_SKIP_DATABASE_CHECK=1 \
+        -e HOST_UID=$(id -u) \
+        -e HOST_GID=$(id -g) \
         bitnami/laravel:latest \
         bash -c "
             echo '📦 Installing dependencies...'
@@ -87,6 +92,7 @@ run_tests() {
             ./vendor/bin/pest
             
             echo '✅ Tests completed successfully!'
+            chown -R \$HOST_UID:\$HOST_GID /app
         "
     
     # Test with PHP 8.5
@@ -100,6 +106,8 @@ run_tests() {
         -e DB_DATABASE=":memory:" \
         -e CACHE_STORE=array \
         -e LARAVEL_SKIP_DATABASE_CHECK=1 \
+        -e HOST_UID=$(id -u) \
+        -e HOST_GID=$(id -g) \
         bitnami/laravel:latest \
         bash -c "
             echo '📦 Installing dependencies...'
@@ -109,6 +117,7 @@ run_tests() {
             ./vendor/bin/pest
             
             echo '✅ Tests with PHP 8.5 completed successfully!'
+            chown -R \$HOST_UID:\$HOST_GID /app
         "
 }
 
