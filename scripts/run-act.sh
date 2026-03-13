@@ -62,7 +62,7 @@ case "$ACTION" in
         ;;
     "tests")
         print_status "🧪 Running TESTS workflow..."
-        run_workflow ".github/workflows/tests.yml" "ci"
+        run_workflow ".github/workflows/laravel.yml" "laravel-tests"
         ;;
     "all")
         print_status "🚀 Running ALL workflows..."
@@ -70,7 +70,7 @@ case "$ACTION" in
         run_workflow ".github/workflows/lint.yml" "quality"
         
         print_status "🧪 Running TESTS workflow..."
-        run_workflow ".github/workflows/tests.yml" "ci"
+        run_workflow ".github/workflows/laravel.yml" "laravel-tests"
         ;;
     "list")
         print_status "📋 Available workflows:"
