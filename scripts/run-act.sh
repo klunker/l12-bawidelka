@@ -48,7 +48,7 @@ run_workflow() {
     
     print_status "🚀 Running workflow: $workflow_file"
     
-    act -j "$job_name" \
+    act -q -j "$job_name" \
         -W "$workflow_file" \
         -P ubuntu-latest=catthehacker/ubuntu:act-latest \
         -s GITHUB_TOKEN=your-token-here

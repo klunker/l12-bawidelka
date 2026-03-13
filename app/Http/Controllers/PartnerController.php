@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Enums\CityCacheKey;
 use App\Models\City;
+use App\Models\Page;
 use App\Models\Partner;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class PartnerController extends Controller
 {
     /**
      * Display the partner page.
      */
-    public function show(string $slug): \Inertia\Response
+    public function show(string $slug): Response
     {
         $partner = Partner::where('slug', $slug)->where('isActive', true)->firstOrFail();
 
@@ -24,7 +26,7 @@ class PartnerController extends Controller
         return Inertia::render('partner', [
             'partner' => $partner,
             'Cities' => $cities,
-            'seo' => \App\Models\Page::where('slug', 'partner')->first()?->seoMeta,
+            'seo' => Page::where('slug', 'partner')->first()?->seoMeta,
         ]);
     }
 }

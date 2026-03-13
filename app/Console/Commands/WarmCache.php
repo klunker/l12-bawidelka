@@ -2,14 +2,15 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\Service;
-use App\Models\Partner;
 use App\Models\Activity;
+use App\Models\Partner;
+use App\Models\Service;
+use Illuminate\Console\Command;
 
 class WarmCache extends Command
 {
     protected $signature = 'cache:warm';
+
     protected $description = 'Warm up application cache for better performance';
 
     public function handle(): int
@@ -36,6 +37,7 @@ class WarmCache extends Command
         }
         $time = round((microtime(true) - $start) * 1000, 2);
         $this->info("Cache warmed in {$time} ms");
+
         return Command::SUCCESS;
     }
 }

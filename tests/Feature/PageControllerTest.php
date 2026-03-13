@@ -2,10 +2,11 @@
 
 use App\Models\City;
 use App\Models\Page;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
-    \Illuminate\Support\Facades\Cache::flush();
+    Cache::flush();
 });
 
 test('it shows active page with seo meta and cities', function () {
@@ -75,7 +76,7 @@ test('cities are cached', function () {
     $response1->assertOk();
 
     // Проверяем, что кеш заполнен
-    expect(\Illuminate\Support\Facades\Cache::get('cities-addresses:active:all'))->not->toBeNull();
+    expect(Cache::get('cities-addresses:active:all'))->not->toBeNull();
 
     // Второй запрос - должен использовать кеш
     $response2 = $this->get("/p/{$page->getAttribute('slug')}");

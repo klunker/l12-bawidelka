@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Page;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -18,8 +20,8 @@ class PageController extends Controller
         return Inertia::render('static-page', [
             'page' => $page,
             'seo' => $page->seoMeta,
-            'Cities' => \Illuminate\Support\Facades\Cache::rememberForever('cities-addresses:active:all', function () {
-                return \App\Models\City::active()->get();
+            'Cities' => Cache::rememberForever('cities-addresses:active:all', function () {
+                return City::active()->get();
             }),
         ]);
     }

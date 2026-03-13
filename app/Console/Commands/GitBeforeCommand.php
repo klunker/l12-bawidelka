@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Process\Process;
 
 class GitBeforeCommand extends Command
 {
@@ -60,16 +61,16 @@ class GitBeforeCommand extends Command
         foreach ($commands as $name => $config) {
             $this->line("\n{$config['description']}...");
 
-            $process = new \Symfony\Component\Process\Process($config['command']);
+            $process = new Process($config['command']);
             $process->run(function ($type, $buffer) {
-                if ($type === \Symfony\Component\Process\Process::ERR) {
+                if ($type === Process::ERR) {
                     $this->error($buffer);
                 } else {
                     $this->line($buffer);
                 }
             });
 
-            if (!$process->isSuccessful()) {
+            if (! $process->isSuccessful()) {
                 $this->error("✗ {$config['description']} failed!");
                 $failed[] = $name;
             } else {
@@ -77,13 +78,15 @@ class GitBeforeCommand extends Command
             }
         }
 
-        if (!empty($failed)) {
+        if (! empty($failed)) {
             $this->error("\n❌ Pre-commit checks failed! Please fix the issues above before committing.");
-            $this->error("Failed checks: " . implode(', ', $failed));
+            $this->error('Failed checks: '.implode(', ', $failed));
+
             return 1;
         }
 
         $this->info("\n✅ All pre-commit checks passed! You can now commit your changes.");
+
         return 0;
     }
 }

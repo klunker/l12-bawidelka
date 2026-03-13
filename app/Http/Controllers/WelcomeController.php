@@ -15,6 +15,7 @@ use App\Models\AboutContent;
 use App\Models\Activity;
 use App\Models\City;
 use App\Models\Faq;
+use App\Models\Page;
 use App\Models\Partner;
 use App\Models\Reason;
 use App\Models\Service;
@@ -51,7 +52,7 @@ class WelcomeController extends Controller
             'GoogleReviews' => Cache::rememberForever(GoogleReviewsCacheKey::ACTIVE->value, function () {
                 return GoogleReviews::getActiveReviews();
             }),
-            'seo' => \App\Models\Page::where('slug', 'home')->first()?->seoMeta,
+            'seo' => Page::where('slug', 'home')->first()?->seoMeta,
         ]);
     }
 }
