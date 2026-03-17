@@ -11,6 +11,7 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -35,17 +36,24 @@ class VariableResource extends Resource
     {
         return $schema
             ->schema([
-                Textarea::make('description')
-                    ->label(__('filament.labels.description'))
-                    ->disabledOn('edit'),
-                Textarea::make('value')
-                    ->label(__('filament.labels.value')),
-                TextInput::make('key')
-                    ->label(__('filament.labels.key'))
-                    ->disabledOn('edit')
-                    ->required()
-                    ->unique(ignoreRecord: true),
-            ]);
+                Section::make(__('filament.sections.general_info'))
+                    ->schema([
+                        Textarea::make('description')
+                            ->label(__('filament.labels.description'))
+                            ->disabledOn('edit'),
+                        TextInput::make('key')
+                            ->label(__('filament.labels.key'))
+                            ->disabledOn('edit')
+                            ->required()
+                            ->unique(ignoreRecord: true),
+                    ]),
+
+                Section::make(__('filament.sections.content'))
+                    ->schema([
+                        Textarea::make('value')
+                            ->label(__('filament.labels.value')),
+                    ]),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

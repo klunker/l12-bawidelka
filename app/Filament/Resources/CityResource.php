@@ -74,7 +74,7 @@ class CityResource extends Resource
                             ->prefixIcon('heroicon-o-camera')
                             ->placeholder(__('filament.placeholders.instagram')),
                     ])->collapsible(),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

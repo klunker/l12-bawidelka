@@ -12,6 +12,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -37,22 +38,25 @@ class FaqResource extends Resource
     {
         return $schema
             ->schema([
-                TextInput::make('question')
-                    ->label(__('filament.labels.question'))
-                    ->required(),
-                RichEditor::make('answer')
-                    ->label(__('filament.labels.answer'))
-                    ->required()
-                    ->columnSpan('full')
-                    ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
-                Toggle::make('isActive')
-                    ->label(__('filament.labels.isActive'))
-                    ->required(),
-                TextInput::make('sort_order')
-                    ->numeric()
-                    ->default(0)
-                    ->label(__('filament.labels.sort_order')),
-            ]);
+                Section::make()
+                    ->schema([
+                        TextInput::make('question')
+                            ->label(__('filament.labels.question'))
+                            ->required(),
+                        RichEditor::make('answer')
+                            ->label(__('filament.labels.answer'))
+                            ->required()
+                            ->columnSpan('full')
+                            ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
+                        Toggle::make('isActive')
+                            ->label(__('filament.labels.isActive'))
+                            ->required(),
+                        TextInput::make('sort_order')
+                            ->numeric()
+                            ->default(0)
+                            ->label(__('filament.labels.sort_order')),
+                    ]),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

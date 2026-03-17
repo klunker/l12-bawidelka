@@ -66,7 +66,7 @@ class UserResource extends Resource
                             ->dehydrated(false)
                             ->required(fn (string $context): bool => $context === 'create'),
                     ])->visible(fn (string $context): bool => $context === 'create' || $context === 'edit'),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

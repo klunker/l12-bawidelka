@@ -14,6 +14,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -39,26 +40,37 @@ class ReasonResource extends Resource
     {
         return $schema
             ->schema([
-                TextInput::make('title')
-                    ->label(__('filament.labels.title'))
-                    ->required(),
-                RichEditor::make('description')
-                    ->label(__('filament.labels.description'))
-                    ->required()
-                    ->columnSpan('full')
-                    ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
-                FileUpload::make('image')
-                    ->label(__('filament.labels.image'))
-                    ->image()
-                    ->disk('public')
-                    ->directory('reasons')
-                    ->visibility('public'),
-                KeyValue::make('attachments')
-                    ->label(__('filament.labels.attachments')),
-                Toggle::make('isActive')
-                    ->label(__('filament.labels.isActive'))
-                    ->required(),
-            ]);
+                Section::make(__('filament.sections.general_info'))
+                    ->schema([
+                        TextInput::make('title')
+                            ->label(__('filament.labels.title'))
+                            ->required(),
+                        Toggle::make('isActive')
+                            ->label(__('filament.labels.isActive'))
+                            ->required(),
+                    ]),
+
+                Section::make(__('filament.sections.content'))
+                    ->schema([
+                        RichEditor::make('description')
+                            ->label(__('filament.labels.description'))
+                            ->required()
+                            ->columnSpan('full')
+                            ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
+                    ]),
+
+                Section::make(__('filament.sections.media'))
+                    ->schema([
+                        FileUpload::make('image')
+                            ->label(__('filament.labels.image'))
+                            ->image()
+                            ->disk('public')
+                            ->directory('reasons')
+                            ->visibility('public'),
+                        KeyValue::make('attachments')
+                            ->label(__('filament.labels.attachments')),
+                    ]),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

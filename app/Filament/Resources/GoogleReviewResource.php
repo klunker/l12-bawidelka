@@ -12,6 +12,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
@@ -38,25 +39,27 @@ class GoogleReviewResource extends Resource
     {
         return $schema
             ->schema([
-                TextInput::make('author_name')
-                    ->label(__('filament.labels.author_name'))
-                    ->required(),
-                TextInput::make('rating')
-                    ->label(__('filament.labels.rating'))
-                    ->numeric()
-                    ->required(),
-                Textarea::make('text')
-                    ->label(__('filament.labels.text'))
-                    ->columnSpan('full'),
-                Toggle::make('is_active')
-                    ->label(__('filament.labels.isActive'))
-                    ->required(),
-                TextInput::make('relative_time_description')
-                    ->label(__('filament.labels.relative_time')),
-                TextInput::make('time')
-                    ->label(__('filament.labels.time'))
-                    ->numeric(),
-            ]);
+                Section::make()->schema([
+                    TextInput::make('author_name')
+                        ->label(__('filament.labels.author_name'))
+                        ->required(),
+                    TextInput::make('rating')
+                        ->label(__('filament.labels.rating'))
+                        ->numeric()
+                        ->required(),
+                    Textarea::make('text')
+                        ->label(__('filament.labels.text'))
+                        ->columnSpan('full'),
+                    Toggle::make('is_active')
+                        ->label(__('filament.labels.isActive'))
+                        ->required(),
+                    TextInput::make('relative_time_description')
+                        ->label(__('filament.labels.relative_time')),
+                    TextInput::make('time')
+                        ->label(__('filament.labels.time'))
+                        ->numeric(),
+                ]),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

@@ -14,6 +14,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -40,46 +41,58 @@ class PartnerResource extends Resource
     {
         return $schema
             ->schema([
-                TextInput::make('name')
-                    ->label(__('filament.labels.name'))
-                    ->required()
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
-                TextInput::make('slug')
-                    ->label(__('filament.labels.slug'))
-                    ->required()
-                    ->unique(Partner::class, 'slug', ignoreRecord: true)
-                    ->alphaDash()
-                    ->hidden(fn (string $operation): bool => $operation === 'create'),
-                FileUpload::make('logo')
-                    ->label(__('filament.labels.logo'))
-                    ->image()
-                    ->required()
-                    ->disk('public')
-                    ->directory('partners')
-                    ->visibility('public'),
-                FileUpload::make('photo')
-                    ->label(__('filament.labels.photo'))
-                    ->image()
-                    ->disk('public')
-                    ->directory('partners')
-                    ->visibility('public'),
-                TextInput::make('url')
-                    ->label(__('filament.labels.url'))
-                    ->url(),
-                RichEditor::make('description')
-                    ->label(__('filament.labels.description'))
-                    ->columnSpanFull()
-                    ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
-                TextInput::make('order')
-                    ->label(__('filament.labels.order'))
-                    ->numeric()
-                    ->default(0),
-                Toggle::make('isActive')
-                    ->label(__('filament.labels.isActive'))
-                    ->required()
-                    ->default(true),
-            ]);
+                Section::make(__('filament.sections.general_info'))
+                    ->schema([
+                        TextInput::make('name')
+                            ->label(__('filament.labels.name'))
+                            ->required()
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn (string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
+                        TextInput::make('slug')
+                            ->label(__('filament.labels.slug'))
+                            ->required()
+                            ->unique(Partner::class, 'slug', ignoreRecord: true)
+                            ->alphaDash()
+                            ->hidden(fn (string $operation): bool => $operation === 'create'),
+                        Toggle::make('isActive')
+                            ->label(__('filament.labels.isActive'))
+                            ->required()
+                            ->default(true),
+                        TextInput::make('order')
+                            ->label(__('filament.labels.order'))
+                            ->numeric()
+                            ->default(0),
+                    ]),
+
+                Section::make(__('filament.sections.media'))
+                    ->schema([
+                        FileUpload::make('logo')
+                            ->label(__('filament.labels.logo'))
+                            ->image()
+                            ->required()
+                            ->disk('public')
+                            ->directory('partners')
+                            ->visibility('public'),
+                        FileUpload::make('photo')
+                            ->label(__('filament.labels.photo'))
+                            ->image()
+                            ->disk('public')
+                            ->directory('partners')
+                            ->visibility('public'),
+
+                    ]),
+
+                Section::make(__('filament.sections.content'))
+                    ->schema([
+                        RichEditor::make('description')
+                            ->label(__('filament.labels.description'))
+                            ->columnSpanFull()
+                            ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
+                        TextInput::make('url')
+                            ->label(__('filament.labels.url'))
+                            ->url(),
+                    ]),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

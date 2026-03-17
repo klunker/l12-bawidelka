@@ -102,71 +102,70 @@ class ActivityResource extends Resource
                                     ->preload(),
                             ]),
                     ]),
-                Grid::make(3)
+
+                Section::make(__('filament.sections.schedule'))
                     ->schema([
-                        Section::make(__('filament.sections.schedule'))
+                        Grid::make(2)
                             ->schema([
-                                Grid::make(2)
-                                    ->schema([
-                                        TextInput::make('duration')
-                                            ->label(__('filament.labels.duration'))
-                                            ->required()
-                                            ->integer()
-                                            ->suffix('min'),
-                                        TextInput::make('order')
-                                            ->label(__('filament.labels.order'))
-                                            ->required()
-                                            ->integer(),
-                                    ]),
+                                TextInput::make('duration')
+                                    ->label(__('filament.labels.duration'))
+                                    ->required()
+                                    ->integer()
+                                    ->suffix('min'),
+                                TextInput::make('order')
+                                    ->label(__('filament.labels.order'))
+                                    ->required()
+                                    ->integer(),
                             ]),
+                    ]),
 
-                        Section::make(__('filament.sections.pricing'))
+                Section::make(__('filament.sections.pricing'))
+                    ->schema([
+                        Grid::make(3)
                             ->schema([
-                                Grid::make(3)
-                                    ->schema([
-                                        TextInput::make('price')
-                                            ->label(__('filament.labels.price'))
-                                            ->required()
-                                            ->numeric()
-                                            ->prefix('PLN'),
-                                        TextInput::make('weekendPrice')
-                                            ->label(__('filament.labels.weekend_price'))
-                                            ->required()
-                                            ->numeric()
-                                            ->prefix('PLN'),
-                                        TextInput::make('extra_price')
-                                            ->label(__('filament.labels.extra_price'))
-                                            ->nullable()
-                                            ->numeric()
-                                            ->prefix('PLN'),
-                                    ]),
+                                TextInput::make('price')
+                                    ->label(__('filament.labels.price'))
+                                    ->required()
+                                    ->numeric()
+                                    ->prefix('PLN'),
+                                TextInput::make('weekendPrice')
+                                    ->label(__('filament.labels.weekend_price'))
+                                    ->required()
+                                    ->numeric()
+                                    ->prefix('PLN'),
+                                TextInput::make('extra_price')
+                                    ->label(__('filament.labels.extra_price'))
+                                    ->nullable()
+                                    ->numeric()
+                                    ->prefix('PLN'),
                             ]),
+                    ]),
 
-                        Section::make(__('filament.sections.age_capacity'))
+                Section::make(__('filament.sections.age_capacity'))
+                    ->schema([
+                        Grid::make(2)
                             ->schema([
-                                Grid::make(2)
-                                    ->schema([
-                                        TextInput::make('ageFrom')
-                                            ->label(__('filament.labels.age_from'))
-                                            ->required()
-                                            ->integer(),
-                                        TextInput::make('ageTo')
-                                            ->label(__('filament.labels.age_to'))
-                                            ->required()
-                                            ->integer(),
-                                        TextInput::make('numChildren')
-                                            ->label(__('filament.labels.num_children'))
-                                            ->required()
-                                            ->integer(),
-                                        TextInput::make('maxChildren')
-                                            ->label(__('filament.labels.max_children'))
-                                            ->required()
-                                            ->integer(),
-                                    ]),
+                                TextInput::make('ageFrom')
+                                    ->label(__('filament.labels.age_from'))
+                                    ->required()
+                                    ->integer(),
+                                TextInput::make('ageTo')
+                                    ->label(__('filament.labels.age_to'))
+                                    ->required()
+                                    ->integer(),
+                                TextInput::make('numChildren')
+                                    ->label(__('filament.labels.num_children'))
+                                    ->required()
+                                    ->integer(),
+                                TextInput::make('maxChildren')
+                                    ->label(__('filament.labels.max_children'))
+                                    ->required()
+                                    ->integer(),
                             ]),
                     ]),
 
                 Section::make(__('filament.sections.content'))
+                    ->columnSpan('full')
                     ->schema([
                         RichEditor::make('description')
                             ->label(__('filament.labels.description'))
@@ -183,7 +182,7 @@ class ActivityResource extends Resource
                             ->addActionLabel(__('filament.labels.add_feature'))
                             ->reorderableWithButtons(),
                     ]),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

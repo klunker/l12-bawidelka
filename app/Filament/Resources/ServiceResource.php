@@ -62,8 +62,7 @@ class ServiceResource extends Resource
                                     ->label(__('filament.labels.slug'))
                                     ->required()
                                     ->unique(ignoreRecord: true)
-                                    ->maxLength(255)
-                                    ->hidden(fn (string $operation): bool => $operation === 'create'),
+                                    ->maxLength(255),
                                 TextInput::make('sub_title')
                                     ->label(__('filament.labels.sub_title'))
                                     ->nullable()
@@ -72,10 +71,7 @@ class ServiceResource extends Resource
                                     ->label(__('filament.labels.isActive'))
                                     ->required()
                                     ->inline(false),
-                                TextInput::make('sort_order')
-                                    ->label(__('filament.labels.sort_order'))
-                                    ->numeric()
-                                    ->default(0),
+
                             ]),
 
                         Section::make(__('filament.sections.media_relations'))
@@ -91,31 +87,40 @@ class ServiceResource extends Resource
                                     ->required()
                                     ->native(false)
                                     ->live(),
-                                FileUpload::make('image')
-                                    ->label(__('filament.labels.image'))
-                                    ->image()
-                                    ->acceptedFileTypes(['image/*'])
-                                    ->required()
-                                    ->disk('public')
-                                    ->directory('services')
-                                    ->visibility('public'),
-                                FileUpload::make('headerImage')
-                                    ->label(__('filament.labels.header_image'))
-                                    ->image()
-                                    ->acceptedFileTypes(['image/*'])
-                                    ->nullable()
-                                    ->disk('public')
-                                    ->directory('services/headers')
-                                    ->visibility('public'),
+
                                 Select::make('cities')
                                     ->label(__('filament.labels.cities'))
                                     ->multiple()
                                     ->relationship('cities', 'name')
                                     ->preload()
                                     ->searchable(),
+                                TextInput::make('sort_order')
+                                    ->label(__('filament.labels.sort_order'))
+                                    ->numeric()
+                                    ->default(0),
                             ]),
+
                     ]),
-                // Row 2: Content
+                Section::make(__('filament.sections.media'))
+                    ->collapsible()
+                    ->schema([
+                        FileUpload::make('image')
+                            ->label(__('filament.labels.image'))
+                            ->image()
+                            ->acceptedFileTypes(['image/*'])
+                            ->required()
+                            ->disk('public')
+                            ->directory('services')
+                            ->visibility('public'),
+                        FileUpload::make('headerImage')
+                            ->label(__('filament.labels.header_image'))
+                            ->image()
+                            ->acceptedFileTypes(['image/*'])
+                            ->nullable()
+                            ->disk('public')
+                            ->directory('services/headers')
+                            ->visibility('public'),
+                    ]),
                 Section::make(__('filament.sections.content'))
                     ->collapsible()
                     ->schema([

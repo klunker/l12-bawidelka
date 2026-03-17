@@ -52,7 +52,7 @@ class AboutContentResource extends Resource
                             ->label(__('filament.labels.isActive'))
                             ->default(true),
                     ]),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
