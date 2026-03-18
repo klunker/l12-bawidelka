@@ -6,6 +6,7 @@ use App\Enums\CityCacheKey;
 use App\Models\City;
 use App\Models\Page;
 use App\Models\Partner;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -19,7 +20,7 @@ class PartnerController extends Controller
         $partner = Partner::where('slug', $slug)->where('isActive', true)->firstOrFail();
 
         // Get active cities for footer
-        $cities = \Cache::rememberForever(CityCacheKey::ACTIVE->value, function () {
+        $cities = Cache::rememberForever(CityCacheKey::ACTIVE->value, function () {
             return City::active()->get();
         });
 

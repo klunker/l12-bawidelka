@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Partner extends Model
 {
@@ -37,7 +38,7 @@ class Partner extends Model
     {
         static::saving(function (Partner $partner) {
             if (empty($partner->slug) && ! empty($partner->name)) {
-                $partner->slug = \Str::slug($partner->name);
+                $partner->slug = Str::slug($partner->name);
             }
         });
 
