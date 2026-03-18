@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Blocks\TlistBlock;
 use App\Filament\Resources\ReasonResource\Pages;
 use App\Models\Reason;
 use Filament\Actions\BulkActionGroup;
@@ -56,6 +57,7 @@ class ReasonResource extends Resource
                             ->label(__('filament.labels.description'))
                             ->required()
                             ->columnSpan('full')
+                            ->customBlocks([TlistBlock::class])
                             ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
                     ]),
 

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Blocks\TlistBlock;
 use App\Filament\Resources\ServiceResource\Pages;
 use App\Models\Service;
 use Filament\Actions\BulkActionGroup;
@@ -129,11 +130,13 @@ class ServiceResource extends Resource
                                 RichEditor::make('description')
                                     ->label(__('filament.labels.description'))
                                     ->required()
-                                    ->columnSpan(1),
+                                    ->columnSpan(1)
+                                    ->customBlocks([TlistBlock::class]),
                                 RichEditor::make('description_additional')
                                     ->label(__('filament.labels.description_additional'))
                                     ->nullable()
                                     ->columnSpan(1)
+                                    ->customBlocks([TlistBlock::class])
                                     ->visible(fn (callable $get) => $get('template') === 'urodzinki'),
                             ]),
                     ]),

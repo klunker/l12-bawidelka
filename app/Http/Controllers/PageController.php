@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\RichContentRendererHelper;
 use App\Models\City;
 use App\Models\Page;
 use Illuminate\Support\Facades\Cache;
@@ -16,6 +17,8 @@ class PageController extends Controller
             ->where('is_active', true)
             ->with('seoMeta')
             ->firstOrFail();
+
+        $page->content = RichContentRendererHelper::render($page->content);
 
         return Inertia::render('static-page', [
             'page' => $page,

@@ -11,6 +11,7 @@ use App\Enums\PartnerCacheKey;
 use App\Enums\ReasonCacheKey;
 use App\Enums\ServiceCacheKey;
 use App\Facades\GoogleReviews;
+use App\Helpers\RichContentRendererHelper;
 use App\Models\AboutContent;
 use App\Models\Activity;
 use App\Models\City;
@@ -27,28 +28,53 @@ class WelcomeController extends Controller
 {
     public function __invoke(): Response
     {
+        $faqs = Cache::rememberForever(FaqCacheKey::ACTIVE->value, function () {
+            return Faq::active()->get();
+        });
+        foreach ($faqs as $faq) {
+            $faq->answer = RichContentRendererHelper::render($faq->answer);
+        }
+
+        $activities = Cache::rememberForever(ActivityCacheKey::ACTIVE->value, function () {
+            return Activity::with('cities')->active()->orderBy('order')->get();
+        });
+        foreach ($activities as $activity) {
+            $activity->description = RichContentRendererHelper::render($activity->description);
+        }
+
+        $aboutContent = Cache::rememberForever(AboutContentCacheKey::ACTIVE->value, function () {
+            return AboutContent::active()->first();
+        });
+        if ($aboutContent) {
+            $aboutContent->content = RichContentRendererHelper::render($aboutContent->content);
+        }
+
+        $partners = Cache::rememberForever(PartnerCacheKey::ACTIVE->value, function () {
+            return Partner::active()->orderBy('order')->get();
+        });
+        foreach ($partners as $partner) {
+            $partner->description = RichContentRendererHelper::render($partner->description);
+        }
+
+        $reasons = Cache::rememberForever(ReasonCacheKey::ACTIVE->value, function () {
+            return Reason::active()->get();
+        });
+        foreach ($reasons as $reason) {
+            $reason->description = RichContentRendererHelper::render($reason->description);
+        }
+
         return Inertia::render('welcome', [
             'Cities' => Cache::rememberForever(CityCacheKey::ACTIVE->value, function () {
                 return City::active()->get();
             }),
-            'Reasons' => Cache::rememberForever(ReasonCacheKey::ACTIVE->value, function () {
-                return Reason::active()->get();
-            }),
-            'Faqs' => Cache::rememberForever(FaqCacheKey::ACTIVE->value, function () {
-                return Faq::active()->get();
-            }),
-            'Partners' => Cache::rememberForever(PartnerCacheKey::ACTIVE->value, function () {
-                return Partner::active()->orderBy('order')->get();
-            }),
-            'Activities' => Cache::rememberForever(ActivityCacheKey::ACTIVE->value, function () {
-                return Activity::with('cities')->active()->orderBy('order')->get();
-            }),
+            'Reasons' => $reasons,
+            'Faqs' => $faqs,
+            'Partners' => $partners,
+            'Activities' => $activities,
             'Services' => Cache::rememberForever(ServiceCacheKey::ACTIVE->value, function () {
                 return Service::with('cities')->active()->orderBy('services.sort_order')->get();
             }),
-            'AboutContent' => Cache::rememberForever(AboutContentCacheKey::ACTIVE->value, function () {
-                return AboutContent::active()->first();
-            }),
+            'AboutContent' => $aboutContent,
             'GoogleReviews' => Cache::rememberForever(GoogleReviewsCacheKey::ACTIVE->value, function () {
                 return GoogleReviews::getActiveReviews();
             }),

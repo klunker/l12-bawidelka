@@ -142,7 +142,7 @@ test('page content is rendered correctly', function () {
                         'id', 'slug', 'title', 'content', 'is_active', 'created_at', 'updated_at', 'seo_meta',
                     ])
                     ->where('title', 'Test Page Title')
-                    ->where('content', 'Test page content with <strong>HTML</strong>')
+                    ->where('content', '<p>Test page content with <strong>HTML</strong></p>')
                     ->where('is_active', true);
             });
     });

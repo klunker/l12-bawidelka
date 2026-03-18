@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Blocks\TlistBlock;
 use App\Filament\Forms\SeoForm;
 use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
@@ -64,6 +65,7 @@ class PageResource extends Resource
                             ->label(__('filament.labels.content'))
                             ->required()
                             ->columnSpanFull()
+                            ->customBlocks([TlistBlock::class])
                             ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
                     ]),
                 SeoForm::make()

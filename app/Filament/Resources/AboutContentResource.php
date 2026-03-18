@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Blocks\TlistBlock;
 use App\Filament\Resources\AboutContentResource\Pages;
 use App\Models\AboutContent;
 use Filament\Actions\BulkActionGroup;
@@ -47,6 +48,7 @@ class AboutContentResource extends Resource
                             ->label(__('filament.labels.content'))
                             ->required()
                             ->columnSpanFull()
+                            ->customBlocks([TlistBlock::class])
                             ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
                         Toggle::make('isActive')
                             ->label(__('filament.labels.isActive'))

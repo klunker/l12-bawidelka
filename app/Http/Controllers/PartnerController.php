@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CityCacheKey;
+use App\Helpers\RichContentRendererHelper;
 use App\Models\City;
 use App\Models\Page;
 use App\Models\Partner;
@@ -18,6 +19,7 @@ class PartnerController extends Controller
     public function show(string $slug): Response
     {
         $partner = Partner::where('slug', $slug)->where('isActive', true)->firstOrFail();
+        $partner->description = RichContentRendererHelper::render($partner->description);
 
         // Get active cities for footer
         $cities = Cache::rememberForever(CityCacheKey::ACTIVE->value, function () {

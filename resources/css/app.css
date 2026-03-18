@@ -410,3 +410,59 @@
     line-height: 2.25rem;
     /* 3xl line height */
 }
+
+/* ──────────────────────────────────────────────────────────────
+   Custom Tlist Block Styles (TipTap Rich Editor)
+   ────────────────────────────────────────────────────────────── */
+.custom-tlist {
+    border: 2px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    margin: 0.75rem 0;
+    background: #f9fafb;
+    cursor: pointer;
+    transition:
+        border-color 150ms,
+        box-shadow 150ms;
+}
+
+.custom-tlist:hover {
+    border-color: var(--color-violet-400, #a78bfa);
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+}
+
+.custom-tlist h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.custom-tlist ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #6b7280;
+}
+
+.custom-tlist ul li {
+    margin-bottom: 0.25rem;
+}
+
+/* Dark mode styles */
+.dark .custom-tlist {
+    border-color: #3f3f46;
+    background: #27272a;
+}
+
+.dark .custom-tlist:hover {
+    border-color: var(--color-violet-400, #a78bfa);
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+}
+
+.dark .custom-tlist h3 {
+    color: #fafafa;
+}
+
+.dark .custom-tlist ul {
+    color: #a1a1aa;
+}

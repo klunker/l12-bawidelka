@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ActivityCacheKey;
 use App\Enums\CityCacheKey;
 use App\Enums\ServiceCacheKey;
+use App\Helpers\RichContentRendererHelper;
 use App\Models\Activity;
 use App\Models\City;
 use App\Models\Service;
@@ -27,6 +28,9 @@ class ServiceViewController extends Controller
         if (! isset($service)) {
             throw new NotFoundHttpException;
         }
+
+        $service->description = RichContentRendererHelper::render($service->description);
+        $service->description_additional = RichContentRendererHelper::render($service->description_additional);
 
         return Inertia::render('service', [
             'Cities' => Cache::rememberForever(CityCacheKey::ACTIVE->value, function () {
