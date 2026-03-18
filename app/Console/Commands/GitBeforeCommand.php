@@ -28,53 +28,56 @@ class GitBeforeCommand extends Command
     {
         $this->info('Running pre-commit quality checks...');
 
-        $commands = [
-            'tests' => [
-                'command' => ['./vendor/bin/phpunit', '--compact'],
+        $tasks = [
+            [
+                'name' => 'tests',
                 'description' => 'Running PHPUnit tests',
                 'critical' => true,
+                'callback' => fn () => $this->call('test', ['--compact']),
             ],
-            'lint' => [
-                'command' => ['./vendor/bin/eslint', '.'],
+            [
+                'name' => 'lint',
                 'description' => 'Running ESLint',
                 'critical' => true,
+                'callback' => fn () => $this->runExternalCommand(['bun', 'run', 'lint']),
             ],
-            'pint' => [
-                'command' => ['./vendor/bin/pint'],
+            [
+                'name' => 'pint',
                 'description' => 'Running Laravel Pint',
                 'critical' => true,
+                'callback' => fn () => $this->runExternalCommand(['./vendor/bin/pint', '--repair']),
             ],
-            'phpstan' => [
-                'command' => ['./vendor/bin/phpstan', 'analyse'],
-                'description' => 'Running PHPStan analysis',
+            [
+                'name' => 'phpstan',
+                'description' => 'Running PHPStan analysis on `app` directory',
                 'critical' => true,
+                'callback' => fn () => $this->runExternalCommand(['./vendor/bin/phpstan', 'analyse', 'app', '--memory-limit=512M']),
             ],
-            'prettier' => [
-                'command' => ['npx', 'prettier', '--check', '.'],
+            [
+                'name' => 'prettier',
                 'description' => 'Running Prettier formatter check',
                 'critical' => true,
+                'callback' => fn () => $this->runExternalCommand(['bunx', 'prettier', '--check', './resources/']),
             ],
         ];
 
         $failed = [];
 
-        foreach ($commands as $name => $config) {
-            $this->line("\n{$config['description']}...");
+        foreach ($tasks as $task) {
+            $this->line("\n{$task['description']}...");
 
-            $process = new Process($config['command']);
-            $process->run(function ($type, $buffer) {
-                if ($type === Process::ERR) {
-                    $this->error($buffer);
+            try {
+                $result = $task['callback']();
+
+                if ($result === 0) {
+                    $this->info("✓ {$task['description']} passed!");
                 } else {
-                    $this->line($buffer);
+                    $this->error("✗ {$task['description']} failed with code {$result}!");
+                    $failed[] = $task['name'];
                 }
-            });
-
-            if (! $process->isSuccessful()) {
-                $this->error("✗ {$config['description']} failed!");
-                $failed[] = $name;
-            } else {
-                $this->info("✓ {$config['description']} passed!");
+            } catch (\Throwable $e) {
+                $this->error("✗ {$task['description']} failed: {$e->getMessage()}");
+                $failed[] = $task['name'];
             }
         }
 
@@ -88,5 +91,16 @@ class GitBeforeCommand extends Command
         $this->info("\n✅ All pre-commit checks passed! You can now commit your changes.");
 
         return 0;
+    }
+
+    private function runExternalCommand(array $args): int
+    {
+        $process = Process::fromShellCommandline(implode(' ', array_map(fn ($a) => escapeshellarg($a), $args)));
+        $process->setTimeout(120);
+        $process->run();
+
+        $this->line($process->getOutput());
+
+        return $process->isSuccessful() ? 0 : 1;
     }
 }

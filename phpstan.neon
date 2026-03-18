@@ -1,0 +1,17 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+        - bootstrap
+        - config
+        - database
+        - routes
+    excludePaths:
+        - bootstrap/providers.php
+    stubFiles:
+        - vendor/laravel/framework/src/Illuminate/Foundation/Testing/TestCase.php
+        - vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php
+    level: 5
+    reportUnmatchedIgnoredErrors: false

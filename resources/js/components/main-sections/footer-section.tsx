@@ -41,9 +41,9 @@ const FooterSection: React.FC<FooterSectionProps> = ({ cities }) => {
                                 <img
                                     src={Logotype}
                                     alt="Bawidelka"
-                                    className="max-w-2/3 w-full mb-3"
+                                    className="mb-3 w-full max-w-2/3"
                                 />
-                                <p className="text-left font-medium italic text-black!">
+                                <p className="text-left font-medium text-black! italic">
                                     Dzielimy się dobrem, są&nbsp;miejsca
                                     w&nbsp;których jesteśmy po&nbsp;prostu.
                                 </p>

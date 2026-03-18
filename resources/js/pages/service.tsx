@@ -41,11 +41,11 @@ export default function ServicePage({
         if (scrollY) {
             requestAnimationFrame(() => {
                 window.scrollTo(0, parseInt(scrollY, 10));
-                
+
                 setTimeout(() => {
                     const currentScroll = window.scrollY;
                     const targetScroll = parseInt(scrollY, 10);
-                    
+
                     if (currentScroll === targetScroll) {
                         localStorage.removeItem('serviceScrollPosition');
                     } else {
