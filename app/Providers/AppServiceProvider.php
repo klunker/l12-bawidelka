@@ -4,8 +4,6 @@ namespace App\Providers;
 
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use Carbon\CarbonImmutable;
-use Filament\Support\Assets\Js;
-use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -27,10 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
-
-        FilamentAsset::register([
-            Js::make('trix-custom', resource_path('js/trix-custom.js')),
-        ]);
     }
 
     /**
