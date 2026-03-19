@@ -2,10 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Activity;
-use App\Models\Service;
-use App\Observers\ActivityObserver;
-use App\Observers\ServiceObserver;
 use BezhanSalleh\LanguageSwitch\LanguageSwitch;
 use Carbon\CarbonImmutable;
 use Filament\Support\Assets\Js;
@@ -31,9 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
-
-        Activity::observe(ActivityObserver::class);
-        Service::observe(ServiceObserver::class);
 
         FilamentAsset::register([
             Js::make('trix-custom', resource_path('js/trix-custom.js')),

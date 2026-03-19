@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Observers\ServiceObserver;
 use Database\Factories\ServiceFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+#[ObservedBy(ServiceObserver::class)]
 class Service extends Model
 {
     /** @use HasFactory<ServiceFactory> */

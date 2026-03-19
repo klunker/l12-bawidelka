@@ -5,23 +5,11 @@ namespace App\Console\Commands;
 use App\Enums\ActivityCacheKey;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'app:clear-activities-cache', description: 'Clear activities cache only')]
 class ClearActivitiesCache extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'app:clear-activities-cache';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Clear activities cache only';
-
     /**
      * Execute the console command.
      */
