@@ -45,6 +45,7 @@ export type Service = {
     title: string;
     sub_title: string | null;
     description: string;
+    description_additional: string;
     createdAt: Date; // Make required since DB will always provide it
     updatedAt: Date; // Make required since DB provide it
     deletedAt: Date | null; // Always use Date | null for consistency

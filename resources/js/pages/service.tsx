@@ -6,14 +6,12 @@ import type { Activity, City, SeoMeta, Service } from '@/types/models';
 
 // Define the template map outside the component to avoid re-creation on every render
 const templates = {
-    standard: lazy(() => import('@/components/service-templates/Standard')),
-    special: lazy(() => import('@/components/service-templates/Special')),
-    urodzinki: lazy(() => import('@/components/service-templates/Urodzinki')),
+    standard: lazy(() => import('@/pages/service/Standard')),
+    special: lazy(() => import('@/pages/service/Special')),
+    urodzinki: lazy(() => import('@/pages/service/Urodzinki')),
 };
 
-const FallbackTemplate = lazy(
-    () => import('@/components/service-templates/Standard'),
-);
+const FallbackTemplate = lazy(() => import('@/pages/service/Standard'));
 
 export default function ServicePage({
     Service,

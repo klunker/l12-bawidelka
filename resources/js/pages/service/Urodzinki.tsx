@@ -74,12 +74,19 @@ export default function SpecialTemplate({
                         }}
                     />
 
-                    <div className="my-16 border-b border-gray-100 pb-12">
+                    <div className="mt-16 mb-10">
                         <h2 className="mb-10 text-center text-3xl font-black text-gray-900">
                             Wybierz swój pakiet przygód
                         </h2>
                         <ActivitySection activities={activities} />
                     </div>
+
+                    <div
+                        className="prose prose-lg mb-8 text-gray-600"
+                        dangerouslySetInnerHTML={{
+                            __html: service.description_additional,
+                        }}
+                    />
 
                     <ServiceOptions serviceOptions={serviceOptions} />
 

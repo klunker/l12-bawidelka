@@ -10,10 +10,10 @@
     "mcp": true,
     "nightwatch_mcp": false,
     "packages": [
-        "laravel/fortify",
-        "filament/filament"
+        "filament/filament",
+        "laravel/fortify"
     ],
-    "sail": true,
+    "sail": false,
     "skills": [
         "wayfinder-development",
         "pest-testing",
