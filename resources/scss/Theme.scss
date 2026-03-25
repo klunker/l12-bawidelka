@@ -695,12 +695,16 @@ main {
     font-weight: 800;
     line-height: 1.125;
     margin-bottom: 25px;
-    @apply text-white text-shadow-2xs;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .cta-description {
     font-size: 1.2rem;
-    @apply text-white text-shadow-lg;
+    color: #fff;
+    text-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.12),
+        0 2px 4px rgba(0, 0, 0, 0.08);
     margin-bottom: 40px;
     line-height: 1.6;
 }
@@ -773,7 +777,7 @@ main {
     }
 
     a {
-        @apply text-black;
+        color: #000;
         text-decoration: none;
         line-height: 1.8;
         transition: color 0.3s ease;
@@ -958,17 +962,36 @@ main {
 
 .button {
     @extend %button-base;
-    @apply px-8 py-3 text-base md:px-10 md:py-4 md:text-lg;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+
+    @media (min-width: 768px) {
+        padding: 1rem 2.5rem;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
 }
 
 .button-sm {
     @extend %button-base;
-    @apply px-4 py-2 text-sm;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
 }
 
 .button-xl {
     @extend %button-base;
-    @apply px-12 py-5 text-2xl text-shadow-xs md:px-14 md:py-6 md:text-2xl;
+    padding: 1.25rem 3rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+    @media (min-width: 768px) {
+        padding: 1.5rem 3.5rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
 
     &:hover {
         box-shadow: 0 10px 25px rgba(136, 183, 182, 0.4);

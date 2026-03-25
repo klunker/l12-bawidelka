@@ -3,13 +3,16 @@
 This directory contains all custom utility scripts for the project.
 
 ## 🏗️ Build Scripts
+
 - `build-simple.sh` - Simple build with UV_THREADPOOL_SIZE=1, RAYON_NUM_THREADS=1
 - `build-with-git.sh` - Git-aware build (checks updates, pulls, then builds)
 
-## 🧪 CI/Testing Scripts  
+## 🧪 CI/Testing Scripts
+
 - `run-act.sh` - Act tool runner for GitHub Actions
 
 ## 📋 Help Scripts
+
 - `scripts-help.sh` - Interactive helper with colors
 - `scripts-help-simple.sh` - Interactive helper without colors
 - `scripts-docs.sh` - Documentation generator
@@ -17,6 +20,7 @@ This directory contains all custom utility scripts for the project.
 ## 🚀 Usage
 
 All scripts are available via npm:
+
 ```bash
 # Build scripts
 npm run build:simple
@@ -38,6 +42,7 @@ npm run help:dev
 ## 🔧 Direct Execution
 
 You can also run scripts directly:
+
 ```bash
 ./scripts/build-simple.sh
 ./scripts/scripts-help.sh

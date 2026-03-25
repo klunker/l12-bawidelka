@@ -27,8 +27,8 @@
             "url": "https://github.com/klunker/laravel-cookie-consent"
         },
         {
-        "type": "vcs",
-        "url": "https://github.com/klunker/filament-language-switch"
+            "type": "vcs",
+            "url": "https://github.com/klunker/filament-language-switch"
         }
     ],
     "require-dev": {
