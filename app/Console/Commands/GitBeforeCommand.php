@@ -24,12 +24,6 @@ class GitBeforeCommand extends Command
                 'callback' => fn () => $this->call('test', ['--compact']),
             ],
             [
-                'name' => 'lint',
-                'description' => 'Running ESLint',
-                'critical' => true,
-                'callback' => fn () => $this->runExternalCommand(['bun', 'run', 'lint']),
-            ],
-            [
                 'name' => 'pint',
                 'description' => 'Running Laravel Pint',
                 'critical' => true,
@@ -42,10 +36,10 @@ class GitBeforeCommand extends Command
                 'callback' => fn () => $this->runExternalCommand(['./vendor/bin/phpstan', 'analyse', 'app', '--memory-limit=512M']),
             ],
             [
-                'name' => 'prettier',
-                'description' => 'Running Prettier formatter check',
+                'name' => 'vp',
+                'description' => 'Running vp lint and check',
                 'critical' => true,
-                'callback' => fn () => $this->runExternalCommand(['bunx', 'prettier', '--check', './resources/']),
+                'callback' => fn () => $this->runExternalCommand(['vp', 'lint', '.', '--fix']),
             ],
         ];
 

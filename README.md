@@ -5,6 +5,7 @@ This is a web application for Bawidełka, built with Laravel on the backend and 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed on your local machine:
+
 - PHP (version specified in `composer.json`, e.g., ^8.4)
 - Composer
 - Node.js & npm
@@ -46,6 +47,7 @@ cp .env.example .env
 Now, open the `.env` file and configure your database connection details (`DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`) and set the application URL.
 
 For local development with `php artisan serve`, your `APP_URL` should typically be:
+
 ```
 APP_URL=http://localhost:8000
 ```
@@ -101,9 +103,11 @@ npm run build
 To run the application locally, you'll need to start both the PHP server and the Vite development server for the frontend.
 
 1.  **Start the Laravel Server:**
+
     ```sh
     php artisan serve
     ```
+
     By default, this will run on `http://localhost:8000`.
 
 2.  **Start the Vite Server:**
@@ -117,21 +121,23 @@ To run the application locally, you'll need to start both the PHP server and the
 This project includes Laravel Sail for Docker-based development.
 
 1.  **Start Sail containers:**
+
     ```sh
     ./vendor/bin/sail up -d
     ```
 
 2.  **Run commands through Sail:**
+
     ```sh
     # Install dependencies
     ./vendor/bin/sail composer install
     ./vendor/bin/sail npm install
-    
+
     # Generate key and migrate
     ./vendor/bin/sail php artisan key:generate
     ./vendor/bin/sail php artisan migrate
     ./vendor/bin/sail php artisan storage:link
-    
+
     # Start development server
     ./vendor/bin/sail npm run dev
     ```
@@ -145,9 +151,9 @@ Now you can access your application at the URL provided by the server.
 
 The admin panel is built with Filament. You can access it at `/admin`.
 
--   **Default User:** A default user is created by the `DatabaseSeeder`.
--   **Email:** `test@example.com`
--   **Password:** `password` (or as defined in the `UserFactory`)
+- **Default User:** A default user is created by the `DatabaseSeeder`.
+- **Email:** `test@example.com`
+- **Password:** `password` (or as defined in the `UserFactory`)
 
 ## Custom Artisan Commands
 
@@ -174,10 +180,11 @@ Ensure your server is configured to serve a Laravel application. The web server 
 ### 2. Environment File
 
 On your production server, create a `.env` file with your production-specific settings:
--   Set `APP_ENV` to `production`.
--   Set `APP_DEBUG` to `false`.
--   Configure your production database credentials.
--   Set `APP_URL` to your public domain (e.g., `https://bawidelka.pl`).
+
+- Set `APP_ENV` to `production`.
+- Set `APP_DEBUG` to `false`.
+- Configure your production database credentials.
+- Set `APP_URL` to your public domain (e.g., `https://bawidelka.pl`).
 
 ### 3. Install Dependencies
 

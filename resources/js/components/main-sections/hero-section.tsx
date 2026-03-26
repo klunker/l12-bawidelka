@@ -1,6 +1,5 @@
 'use client';
 import { Button } from '@radix-ui/themes';
-import * as React from 'react';
 
 export const HeroSection = () => {
     const redirectToServices = () => {

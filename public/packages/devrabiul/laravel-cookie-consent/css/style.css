@@ -1,21 +1,21 @@
 :root {
-    --cc-card-bg-color: #FFFFFF;
+    --cc-card-bg-color: #ffffff;
     --cc-card-text-color: #000000;
     --cc-button-bg-color: #161a1d;
     --cc-button-bg-color-rgb: 22, 26, 29;
-    --cc-button-bg-opacity: .8;
-    --cc-button-text-color: #FFFFFF;
+    --cc-button-bg-opacity: 0.8;
+    --cc-button-text-color: #ffffff;
     --cc-modal-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-[theme="dark"] {
+[theme='dark'] {
     --cc-card-bg-color: #161a1c;
     --cc-card-text-color: #f0f0f0;
     --cc-button-bg-color-rgb: 194, 208, 224;
     --cc-button-text-color: #161a1c;
 }
 
-[cookie-consent-theme-preset="modern-blue"] {
+[cookie-consent-theme-preset='modern-blue'] {
     --cc-card-bg-color: #ffffff;
     --cc-card-text-color: #1f2937;
 
@@ -25,7 +25,7 @@
     --cc-border-color: #e5e7eb;
 }
 
-[cookie-consent-theme-preset="trust-green"] {
+[cookie-consent-theme-preset='trust-green'] {
     --cc-card-bg-color: #f0fdf4;
     --cc-card-text-color: #14532d;
 
@@ -35,7 +35,7 @@
     --cc-border-color: #bbf7d0;
 }
 
-[cookie-consent-theme-preset="soft-neutral"] {
+[cookie-consent-theme-preset='soft-neutral'] {
     --cc-card-bg-color: #f9fafb;
     --cc-card-text-color: #374151;
 
@@ -45,7 +45,7 @@
     --cc-border-color: #e5e7eb;
 }
 
-[cookie-consent-theme-preset="dark"] {
+[cookie-consent-theme-preset='dark'] {
     --cc-card-bg-color: #161a1c;
     --cc-card-text-color: #f3f4f6;
 
@@ -61,8 +61,8 @@
 }
 
 .cookie-disable-interaction body::before {
-    background: rgba(0, 0, 0, .65);
-    content: "";
+    background: rgba(0, 0, 0, 0.65);
+    content: '';
     inset: 0;
     opacity: 1;
     position: fixed;
@@ -148,7 +148,7 @@
     font-weight: 600;
     color: var(--cc-card-text-color);
     margin: 0;
-    padding: 0 0 .35rem 0;
+    padding: 0 0 0.35rem 0;
 }
 
 .cookie-consent-content-description {
@@ -156,7 +156,7 @@
     color: var(--cc-card-text-color);
     margin: 0;
     padding: 0;
-    opacity: .8;
+    opacity: 0.8;
 }
 
 .cookie-consent-button-container {
@@ -200,13 +200,16 @@
 }
 
 .cookie-consent-button-container button {
-    padding: .5rem 1.25rem;
+    padding: 0.5rem 1.25rem;
     border: none;
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: rgba(var(--cc-button-bg-color-rgb), var(--cc-button-bg-opacity, 1));
+    background-color: rgba(
+        var(--cc-button-bg-color-rgb),
+        var(--cc-button-bg-opacity, 1)
+    );
     color: var(--cc-button-text-color);
     min-width: max-content;
 }
@@ -226,13 +229,13 @@
 
 .cookie-consent-links-container {
     text-align: center;
-    padding: .25rem 1.25rem;
+    padding: 0.25rem 1.25rem;
     background: #ffffff;
     background: -webkit-linear-gradient(0deg, #ffffff 0%, #efefef 100%);
     background: linear-gradient(0deg, #ffffff 0%, #efefef 100%);
 }
 
-[theme="dark"] .cookie-consent-links-container {
+[theme='dark'] .cookie-consent-links-container {
     background: #1e1e1e;
     background: -webkit-linear-gradient(0deg, #1e1e1e 0%, #2a2a2a 100%);
     background: linear-gradient(0deg, #1e1e1e 0%, #2a2a2a 100%);
@@ -244,7 +247,7 @@
     padding: 0;
     margin: 0;
     display: inline-flex;
-    gap: .5rem 1rem;
+    gap: 0.5rem 1rem;
     flex-wrap: wrap;
     justify-content: center;
 }
@@ -272,7 +275,6 @@
 }
 
 @media (max-width: 575.98px) {
-
     .cookie-consent-button-container button,
     .consent-layout-box-wide .cookie-consent-button-action,
     .consent-layout-bar .cookie-consent-button-action,
@@ -463,7 +465,7 @@
 
 .cookie-preferences-modal-header h2 {
     margin: 0;
-    font-size: .95rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--cc-card-text-color);
 }
@@ -500,16 +502,20 @@
     overflow-y: auto;
     flex-grow: 1;
     scrollbar-width: thin;
-    scrollbar-color: rgba(var(--cc-button-bg-color-rgb), var(--cc-button-bg-opacity, 1)) rgba(0, 0, 0, 0.1);
+    scrollbar-color: rgba(
+            var(--cc-button-bg-color-rgb),
+            var(--cc-button-bg-opacity, 1)
+        )
+        rgba(0, 0, 0, 0.1);
 }
 
 .cookie-preferences-modal p {
     margin: 0;
-    font-size: .85rem;
+    font-size: 0.85rem;
     color: var(--cc-card-text-color);
     line-height: 1.5;
     font-weight: 400;
-    opacity: .75;
+    opacity: 0.75;
 }
 
 .cookie-preferences-modal-body::-webkit-scrollbar {
@@ -522,7 +528,10 @@
 }
 
 .cookie-preferences-modal-body::-webkit-scrollbar-thumb {
-    background-color: rgba(var(--cc-button-bg-color-rgb), var(--cc-button-bg-opacity, 1));
+    background-color: rgba(
+        var(--cc-button-bg-color-rgb),
+        var(--cc-button-bg-opacity, 1)
+    );
     border-radius: 3px;
 }
 
@@ -577,10 +586,13 @@
 }
 
 .primary-button {
-    background-color: rgba(var(--cc-button-bg-color-rgb), var(--cc-button-bg-opacity, 1));
+    background-color: rgba(
+        var(--cc-button-bg-color-rgb),
+        var(--cc-button-bg-opacity, 1)
+    );
     color: var(--cc-button-text-color);
     border: none;
-    padding: .5rem 1.25rem;
+    padding: 0.5rem 1.25rem;
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.9rem;
@@ -590,11 +602,17 @@
 
 .primary-button:hover,
 .primary-button:focus {
-    background-color: rgba(var(--cc-button-bg-color-rgb), var(--cc-button-bg-opacity, 1));
+    background-color: rgba(
+        var(--cc-button-bg-color-rgb),
+        var(--cc-button-bg-opacity, 1)
+    );
 }
 
 .secondary-button {
-    background-color: rgba(var(--cc-button-bg-color-rgb), var(--cc-button-bg-opacity, 1));
+    background-color: rgba(
+        var(--cc-button-bg-color-rgb),
+        var(--cc-button-bg-opacity, 1)
+    );
     color: var(--cc-button-text-color);
     padding: 10px 20px;
     border-radius: 6px;
@@ -637,7 +655,7 @@
 
 .cookie-toggle-slider:before {
     position: absolute;
-    content: "";
+    content: '';
     height: 20px;
     width: 20px;
     left: 2px;
@@ -649,7 +667,10 @@
 }
 
 .cookie-toggle input:checked + .cookie-toggle-slider {
-    background-color: rgba(var(--cc-button-bg-color-rgb), var(--cc-button-bg-opacity, 1));
+    background-color: rgba(
+        var(--cc-button-bg-color-rgb),
+        var(--cc-button-bg-opacity, 1)
+    );
 }
 
 .cookie-toggle input:checked + .cookie-toggle-slider:before {
@@ -671,11 +692,11 @@
         width: 95%;
         max-height: 85vh;
     }
-    
+
     .cookie-preferences-modal-footer {
         flex-direction: column;
     }
-    
+
     .primary-button {
         width: 100%;
     }

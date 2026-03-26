@@ -6,16 +6,12 @@ import FooterSection from '@/components/main-sections/footer-section';
 import NavigationBar from '@/components/main-sections/navigation-bar';
 import SeoHead from '@/components/seo-head';
 import { OptimizedImage } from '@/components/ui/optimized-image';
-import type { City, Partner } from '@/types/models';
+import type { City, Partner, SeoMeta } from '@/types/models';
 
 interface PartnerPageProps {
     partner: Partner;
     Cities: Array<City>;
-    seo?: {
-        title?: string | null;
-        description?: string | null;
-        keywords?: string | null;
-    } | null;
+    seo?: SeoMeta | null;
 }
 
 const PartnerPage: React.FC<PartnerPageProps> = ({ partner, Cities, seo }) => {

@@ -1,20 +1,13 @@
 {
-    "agents": [
-        "claude_code",
-        "opencode",
-        "gemini",
-        "amp"
-    ],
+    "agents": ["claude_code", "opencode", "gemini", "amp"],
     "guidelines": true,
     "herd_mcp": false,
     "mcp": true,
     "nightwatch_mcp": false,
-    "packages": [
-        "filament/filament",
-        "laravel/fortify"
-    ],
+    "packages": ["filament/filament", "laravel/fortify"],
     "sail": false,
     "skills": [
+        "laravel-best-practices",
         "wayfinder-development",
         "pest-testing",
         "inertia-react-development",
