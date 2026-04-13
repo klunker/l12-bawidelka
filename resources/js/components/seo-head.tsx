@@ -7,7 +7,7 @@ interface SeoHeadProps {
 }
 
 export default function SeoHead({ title, seo }: SeoHeadProps) {
-    const defaultTitle = 'Laraval B2';
+    const defaultTitle = 'Bawidelka';
     const seoTitle = seo?.title || title || defaultTitle;
     const description = seo?.description || '';
     const keywords = seo?.keywords || '';
