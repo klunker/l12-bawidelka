@@ -3,6 +3,7 @@
 namespace App\Filament\Blocks;
 
 use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor\RichContentCustomBlock;
 
@@ -21,23 +22,26 @@ class ButtonBlock extends RichContentCustomBlock
     public static function configureEditorAction(Action $action): Action
     {
         return $action
-            ->modalDescription('Configure the button link block')
+            ->modalDescription(__('filament.modals.configure_button_link'))
             ->modalWidth('lg')
             ->schema([
                 TextInput::make('text')
-                    ->label('Button Text')
-                    ->placeholder('Enter button text...')
+                    ->label(__('filament.labels.button_text'))
+                    ->placeholder(__('filament.placeholders.button_text'))
                     ->required(),
                 TextInput::make('url')
-                    ->label('Button URL')
-                    ->placeholder('Enter button URL (e.g., https://example.com or /page)...')
+                    ->label(__('filament.labels.button_url'))
+                    ->placeholder(__('filament.placeholders.button_url'))
                     ->url()
                     ->required(),
-                TextInput::make('target')
-                    ->label('Target')
-                    ->placeholder('_self or _blank')
+                Select::make('target')
+                    ->label(__('filament.labels.target'))
+                    ->options([
+                        '_self' => __('filament.options.target._self'),
+                        '_blank' => __('filament.options.target._blank'),
+                    ])
                     ->default('_self')
-                    ->helperText('_self opens in same tab, _blank opens in new tab'),
+                    ->helperText(__('filament.helpers.target')),
             ]);
     }
 

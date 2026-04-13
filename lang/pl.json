@@ -104,6 +104,7 @@
     "filament.sections.seo_metadata": "Metadane SEO",
     "filament.options.template.standard": "Standardowy",
     "filament.options.template.special": "Specjalny",
+    "filament.options.template.trip": "Kolonie",
     "filament.options.template.urodzinki": "Urodzinki",
     "filament.options.color.default": "Domyślny",
     "filament.options.color.mint": "Miętowy",
@@ -113,5 +114,14 @@
     "filament.options.color.pistachio": "Pistacjowy",
     "filament.options.color.lavender": "Lawendowy",
     "filament.placeholders.facebook": "https://facebook.com/...",
-    "filament.placeholders.instagram": "https://instagram.com/..."
+    "filament.placeholders.instagram": "https://instagram.com/...",
+    "filament.options.target._self": "Ta sama karta (_self)",
+    "filament.options.target._blank": "Nowa karta (_blank)",
+    "filament.helpers.target": "Wybierz, gdzie ma zosta otwarty link",
+    "filament.labels.button_text": "Tekst przycisku",
+    "filament.labels.button_url": "URL przycisku",
+    "filament.labels.target": "Cel",
+    "filament.placeholders.button_text": "Wpisz tekst przycisku...",
+    "filament.placeholders.button_url": "Wpisz URL przycisku (np. https://example.com lub /strona)...",
+    "filament.modals.configure_button_link": "Skonfiguruj blok przycisku linku"
 }

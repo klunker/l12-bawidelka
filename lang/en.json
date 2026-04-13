@@ -104,6 +104,7 @@
     "filament.sections.seo_metadata": "SEO Metadata",
     "filament.options.template.standard": "Standard",
     "filament.options.template.special": "Special",
+    "filament.options.template.trip": "Trip",
     "filament.options.template.urodzinki": "Birthday Patty",
     "filament.options.color.default": "Default",
     "filament.options.color.mint": "Mint",
@@ -113,5 +114,14 @@
     "filament.options.color.pistachio": "Pistachio",
     "filament.options.color.lavender": "Lavender",
     "filament.placeholders.facebook": "https://facebook.com/...",
-    "filament.placeholders.instagram": "https://instagram.com/..."
+    "filament.placeholders.instagram": "https://instagram.com/...",
+    "filament.options.target._self": "Same tab (_self)",
+    "filament.options.target._blank": "New tab (_blank)",
+    "filament.helpers.target": "Choose where the link opens",
+    "filament.labels.button_text": "Button Text",
+    "filament.labels.button_url": "Button URL",
+    "filament.labels.target": "Target",
+    "filament.placeholders.button_text": "Enter button text...",
+    "filament.placeholders.button_url": "Enter button URL (e.g., https://example.com or /page)...",
+    "filament.modals.configure_button_link": "Configure the button link block"
 }

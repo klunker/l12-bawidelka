@@ -420,7 +420,6 @@
     padding: 1rem 1.25rem;
     margin: 0.75rem 0;
     background: #f9fafb;
-    cursor: pointer;
     transition:
         border-color 150ms,
         box-shadow 150ms;

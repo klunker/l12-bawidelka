@@ -8,6 +8,7 @@ import type { Activity, City, SeoMeta, Service } from '@/types/models';
 const templates = {
     standard: lazy(() => import('@/pages/service/Standard')),
     special: lazy(() => import('@/pages/service/Special')),
+    trip: lazy(() => import('@/pages/service/Trip')),
     urodzinki: lazy(() => import('@/pages/service/Urodzinki')),
 };
 

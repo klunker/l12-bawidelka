@@ -84,6 +84,7 @@ class ServiceResource extends Resource
                                     ->options([
                                         'standard' => __('filament.options.template.standard'),
                                         'special' => __('filament.options.template.special'),
+                                        'trip' => __('filament.options.template.trip'),
                                         'urodzinki' => __('filament.options.template.urodzinki'),
                                     ])
                                     ->required()
