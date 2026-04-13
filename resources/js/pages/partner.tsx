@@ -103,8 +103,8 @@ const PartnerPage: React.FC<PartnerPageProps> = ({ partner, Cities, seo }) => {
                         </div>
 
                         {/* Right Column - Logo/Visual */}
-                        <div className="flex flex-col items-center justify-center space-y-8 lg:ml-[25%] lg:items-start lg:space-y-6">
-                            {/* Logo above photo - no borders */}
+                        <div className="flex flex-col items-start justify-start space-y-8 lg:ml-[25%] lg:space-y-6">
+                            {/* Logo - always shown if exists */}
                             {partner.logo_url && (
                                 <div className="relative h-36 w-36 sm:h-44 sm:w-44 lg:h-52 lg:w-52">
                                     <OptimizedImage
@@ -117,8 +117,8 @@ const PartnerPage: React.FC<PartnerPageProps> = ({ partner, Cities, seo }) => {
                                 </div>
                             )}
 
-                            {/* Partner Photo */}
-                            {partner.photo_url ? (
+                            {/* Partner Photo - only show if exists */}
+                            {partner.photo_url && (
                                 <div className="relative">
                                     <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-mint-200 to-mint-400 opacity-20 blur-3xl"></div>
                                     <div className="relative overflow-hidden rounded-3xl shadow-2xl">
@@ -130,22 +130,6 @@ const PartnerPage: React.FC<PartnerPageProps> = ({ partner, Cities, seo }) => {
                                                 className="object-cover"
                                                 sizes="(max-width: 640px) 256px, (max-width: 1024px) 320px, 384px"
                                             />
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="relative">
-                                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-mint-200 to-mint-400 opacity-20 blur-3xl"></div>
-                                    <div className="relative flex h-80 w-80 items-center justify-center rounded-3xl bg-white shadow-2xl">
-                                        <div className="text-center">
-                                            <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-mint-100">
-                                                <span className="text-4xl font-bold text-mint-600">
-                                                    {partner.name.charAt(0)}
-                                                </span>
-                                            </div>
-                                            <p className="text-gray-500">
-                                                No photo available
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
