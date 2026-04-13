@@ -37,7 +37,7 @@ const PartnersSection: React.FC<PartnerSectionProps> = ({ partners = [] }) => {
         <a
             key={`${partner.id}-${index}`}
             href={partnerShow.url(partner.slug)}
-            target="_blank"
+            target="_self"
             rel="noopener noreferrer"
             className="relative flex h-64 w-64 shrink-0 items-center justify-center transition-all duration-300 select-none hover:scale-110"
             draggable={false}

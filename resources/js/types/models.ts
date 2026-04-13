@@ -76,6 +76,8 @@ export type Partner = {
     slug: string;
     logo: string;
     logo_url: string;
+    photo: string;
+    photo_url: string;
     url: string;
     description: string | null;
     createdAt: Date;
