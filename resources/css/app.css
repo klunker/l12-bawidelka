@@ -425,11 +425,6 @@
         box-shadow 150ms;
 }
 
-.custom-tlist:hover {
-    border-color: var(--color-violet-400, #a78bfa);
-    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
-}
-
 .custom-tlist h3 {
     margin: 0 0 0.5rem;
     font-size: 1rem;
@@ -451,11 +446,6 @@
 .dark .custom-tlist {
     border-color: #3f3f46;
     background: #27272a;
-}
-
-.dark .custom-tlist:hover {
-    border-color: var(--color-violet-400, #a78bfa);
-    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
 }
 
 .dark .custom-tlist h3 {
