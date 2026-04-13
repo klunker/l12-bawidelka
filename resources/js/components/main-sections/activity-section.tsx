@@ -165,7 +165,7 @@ const ActivityCard: React.FC<{ activity: Activity }> = ({ activity }) => {
                                     {activity.numChildren} dzieci w cenie
                                 </p>
                                 <p className="text-[10px] text-gray-800 italic">
-                                    + każde kolejne dziedcko
+                                    + każde kolejne dziecko
                                 </p>
                             </div>
                             <p className="text-lg font-black text-gray-900">
