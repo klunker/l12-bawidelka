@@ -32,8 +32,8 @@ class ButtonBlock extends RichContentCustomBlock
                 TextInput::make('url')
                     ->label(__('filament.labels.button_url'))
                     ->placeholder(__('filament.placeholders.button_url'))
-                    ->url()
-                    ->required(),
+                    ->required()
+                    ->rules(['regex:/^(https?:\/\/|tel:|\/).+/']),
                 Select::make('target')
                     ->label(__('filament.labels.target'))
                     ->options([

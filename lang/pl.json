@@ -122,6 +122,6 @@
     "filament.labels.button_url": "URL przycisku",
     "filament.labels.target": "Cel",
     "filament.placeholders.button_text": "Wpisz tekst przycisku...",
-    "filament.placeholders.button_url": "Wpisz URL przycisku (np. https://example.com lub /strona)...",
+    "filament.placeholders.button_url": "Wpisz URL przycisku lub numer telefonu (np. https://example.com, /strona, lub tel:+123456789)...",
     "filament.modals.configure_button_link": "Skonfiguruj blok przycisku linku"
 }

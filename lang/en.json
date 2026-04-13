@@ -122,6 +122,6 @@
     "filament.labels.button_url": "Button URL",
     "filament.labels.target": "Target",
     "filament.placeholders.button_text": "Enter button text...",
-    "filament.placeholders.button_url": "Enter button URL (e.g., https://example.com or /page)...",
+    "filament.placeholders.button_url": "Enter button URL or phone number (e.g., https://example.com, /page, or tel:+123456789)...",
     "filament.modals.configure_button_link": "Configure the button link block"
 }
