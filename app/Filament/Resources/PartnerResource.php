@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Blocks\TlistBlock;
+use App\Filament\Blocks\ButtonBlock;
 use App\Filament\Resources\PartnerResource\Pages;
 use App\Models\Partner;
 use Filament\Actions\BulkActionGroup;
@@ -88,7 +89,7 @@ class PartnerResource extends Resource
                         RichEditor::make('description')
                             ->label(__('filament.labels.description'))
                             ->columnSpanFull()
-                            ->customBlocks([TlistBlock::class])
+                            ->customBlocks([TlistBlock::class, ButtonBlock::class])
                             ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
                         TextInput::make('url')
                             ->label(__('filament.labels.url'))

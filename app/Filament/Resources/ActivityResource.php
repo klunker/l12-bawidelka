@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Blocks\TlistBlock;
+use App\Filament\Blocks\ButtonBlock;
 use App\Filament\Resources\ActivityResource\Pages;
 use App\Models\Activity;
 use Filament\Actions\BulkActionGroup;
@@ -172,7 +173,7 @@ class ActivityResource extends Resource
                             ->label(__('filament.labels.description'))
                             ->nullable()
                             ->columnSpan('full')
-                            ->customBlocks([TlistBlock::class])
+                            ->customBlocks([TlistBlock::class, ButtonBlock::class])
                             ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
                         Repeater::make('features')
                             ->label(__('filament.labels.features'))

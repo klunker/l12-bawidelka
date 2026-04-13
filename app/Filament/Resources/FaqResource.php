@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Blocks\TlistBlock;
+use App\Filament\Blocks\ButtonBlock;
 use App\Filament\Resources\FaqResource\Pages;
 use App\Models\Faq;
 use Filament\Actions\BulkActionGroup;
@@ -48,7 +49,7 @@ class FaqResource extends Resource
                             ->label(__('filament.labels.answer'))
                             ->required()
                             ->columnSpan('full')
-                            ->customBlocks([TlistBlock::class])
+                            ->customBlocks([TlistBlock::class, ButtonBlock::class])
                             ->extraInputAttributes(['class' => 'max-h-96', 'style' => 'overflow-y: scroll;']),
                         Toggle::make('isActive')
                             ->label(__('filament.labels.isActive'))

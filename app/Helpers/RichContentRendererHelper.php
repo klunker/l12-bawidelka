@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Filament\Blocks\TlistBlock;
+use App\Filament\Blocks\ButtonBlock;
 use Filament\Forms\Components\RichEditor\RichContentRenderer;
 
 class RichContentRendererHelper
@@ -14,7 +15,7 @@ class RichContentRendererHelper
         }
 
         return RichContentRenderer::make($content)
-            ->customBlocks([TlistBlock::class])
+            ->customBlocks([TlistBlock::class, ButtonBlock::class])
             ->toHtml();
     }
 }
