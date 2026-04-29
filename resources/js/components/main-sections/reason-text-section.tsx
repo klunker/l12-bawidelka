@@ -56,7 +56,7 @@ const ReasonTextSection: React.FC<ReasonTextSectionProps> = ({
                             key={currentIndex}
                         >
                             <blockquote className="mb-6 text-2xl leading-relaxed font-medium text-gray-800 md:text-3xl">
-                                &bdquo; {currentReason.title}&ldquo;
+                                &bdquo;{currentReason.title}&ldquo;
                             </blockquote>
                             <div
                                 className="mx-auto max-w-2xl text-lg text-gray-600"
