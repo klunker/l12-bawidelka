@@ -10,6 +10,9 @@ import ServiceSection from '@/components/main-sections/service-section';
 import TestimonialsSection from '@/components/main-sections/testimonials-section';
 import SeoHead from '@/components/seo-head';
 import usePhoneNumber from '@/hooks/use-phone-number';
+import { usePhoneCall } from '@/contexts/phone-call-context';
+import { callToPhone } from '@/lib/utils';
+import { useEffect } from 'react';
 import type {
     AboutContent,
     City,
@@ -41,6 +44,15 @@ export default function Welcome({
     seo: SeoMeta | null;
 }) {
     const phoneNumber = usePhoneNumber(true);
+    const { setCities } = usePhoneCall();
+
+    // Set cities in context when component mounts
+    useEffect(() => {
+        if (Cities && Cities.length > 0) {
+            setCities(Cities);
+        }
+    }, [Cities, setCities]);
+
     return (
         <>
             <SeoHead title="Welcome" seo={seo} />
@@ -58,7 +70,7 @@ export default function Welcome({
                 description="Dołącz do setek rodzin, które już odkryły idealne miejsce dla swoich dzieci, gdzie mogą się uczyć, rozwijać i osiągać sukcesy."
                 buttonLabel="Zacznij już dziś"
                 func={() => {
-                    window.location.href = `tel:${phoneNumber}`;
+                    callToPhone(phoneNumber);
                 }}
             />
             <FooterSection cities={Cities} />

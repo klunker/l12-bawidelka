@@ -10,7 +10,16 @@ export function cn(...inputs: ClassValue[]) {
 export function toUrl(url: NonNullable<InertiaLinkProps['href']>): string {
     return typeof url === 'string' ? url : url.url;
 }
+
 export function callToPhone(phoneNumber: string) {
+    // Dispatch custom event to trigger phone call popup
+    const event = new CustomEvent('phoneCallRequested', {
+        detail: { phoneNumber },
+    });
+    window.dispatchEvent(event);
+}
+
+export function directCallToPhone(phoneNumber: string) {
     window.location.href = `tel:${phoneNumber}`;
 }
 

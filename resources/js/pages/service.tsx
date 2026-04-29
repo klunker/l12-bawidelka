@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useMemo } from 'react';
 import FooterSection from '@/components/main-sections/footer-section';
 import NavigationBar from '@/components/main-sections/navigation-bar';
 import SeoHead from '@/components/seo-head';
+import { usePhoneCall } from '@/contexts/phone-call-context';
 import type { Activity, City, SeoMeta, Service } from '@/types/models';
 
 // Define the template map outside the component to avoid re-creation on every render
@@ -25,6 +26,15 @@ export default function ServicePage({
     Activities: Array<Activity>;
     seo: SeoMeta | null;
 }) {
+    const { setCities } = usePhoneCall();
+
+    // Set cities in context when component mounts
+    useEffect(() => {
+        if (Cities && Cities.length > 0) {
+            setCities(Cities);
+        }
+    }, [Cities, setCities]);
+
     // Select the correct component based on the service template
     const TemplateComponent = useMemo(() => {
         const templateName = Service.template?.toLowerCase();

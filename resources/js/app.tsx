@@ -7,6 +7,8 @@ import '../css/app.css';
 import '../scss/Theme.scss';
 import '@radix-ui/themes/styles.css';
 import { initializeTheme } from './hooks/use-appearance';
+import { PhoneCallProvider } from './contexts/phone-call-context';
+import { PhoneCallPopup } from './components/ui/phone-call-popup';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -22,9 +24,12 @@ void createInertiaApp({
 
         root.render(
             <StrictMode>
-                <Theme accentColor="blue" appearance="light" scaling="110%">
-                    <App {...props} />
-                </Theme>
+                <PhoneCallProvider>
+                    <Theme accentColor="blue" appearance="light" scaling="110%">
+                        <App {...props} />
+                    </Theme>
+                    <PhoneCallPopup />
+                </PhoneCallProvider>
             </StrictMode>,
         );
     },
