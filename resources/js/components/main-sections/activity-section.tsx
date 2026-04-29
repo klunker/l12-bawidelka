@@ -7,7 +7,6 @@ import {
     EmptyHeader,
     EmptyTitle,
 } from '@/components/ui/empty';
-import { OptimizedImage } from '@/components/ui/optimized-image';
 import type { Activity } from '@/types/models';
 
 const ActivityCard: React.FC<{ activity: Activity }> = ({ activity }) => {
@@ -104,15 +103,20 @@ const ActivityCard: React.FC<{ activity: Activity }> = ({ activity }) => {
             className={`flex h-full flex-col overflow-hidden rounded-4xl border bg-white ${theme.border} group shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)]`}
         >
             {/* Image Wrapper */}
-            <div className="relative aspect-16/10 overflow-hidden">
-                <OptimizedImage
-                    src={activity.image_url}
-                    alt={activity.name}
-                    width={355}
-                    height={222}
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
+            {/*<div className="relative aspect-16/10 overflow-hidden">*/}
+            {/*    <OptimizedImage*/}
+            {/*        src={activity.image_url}*/}
+            {/*        alt={activity.name}*/}
+            {/*        width={355}*/}
+            {/*        height={222}*/}
+            {/*        className="object-cover transition-transform duration-500 group-hover:scale-110"*/}
+            {/*        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"*/}
+            {/*    />*/}
+            {/*    */}
+            {/*</div>*/}
+
+            {/* Content */}
+            <div className="relative flex grow flex-col p-6">
                 {activity.badge && (
                     <div
                         className={`absolute top-4 right-4 ${theme.badge} rounded-full px-3 py-1 text-[10px] font-bold tracking-wider text-white uppercase shadow-sm`}
@@ -120,10 +124,6 @@ const ActivityCard: React.FC<{ activity: Activity }> = ({ activity }) => {
                         {activity.badge}
                     </div>
                 )}
-            </div>
-
-            {/* Content */}
-            <div className="flex grow flex-col p-6">
                 <div className="mb-4">
                     <p
                         className={`text-[10px] font-bold tracking-[0.2em] uppercase ${theme.text} mb-1 opacity-70`}
