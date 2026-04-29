@@ -45,8 +45,7 @@ const ReasonTextSection: React.FC<ReasonTextSectionProps> = ({
             <div className="mx-auto max-w-4xl py-25 text-center">
                 <div className="mb-3 text-center">
                     <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-                        Dlaczego warto wybrać{' '}
-                        <span className="text-mint-600">Bawidełka</span>?
+                        Dlaczego warto wybrać Bawidełka
                     </h2>
                 </div>
 
@@ -57,7 +56,7 @@ const ReasonTextSection: React.FC<ReasonTextSectionProps> = ({
                             key={currentIndex}
                         >
                             <blockquote className="mb-6 text-2xl leading-relaxed font-medium text-gray-800 md:text-3xl">
-                                "{currentReason.title}"
+                                &bdquo; {currentReason.title}&ldquo;
                             </blockquote>
                             <div
                                 className="mx-auto max-w-2xl text-lg text-gray-600"
