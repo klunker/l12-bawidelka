@@ -817,6 +817,11 @@ main {
 }
 
 @media (max-width: 768px) {
+    .hero {
+        align-items: center;
+        padding: 50vh 0 35px;
+    }
+
     .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
@@ -825,6 +830,11 @@ main {
 
     h1 {
         font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    .hero-title {
+        font-size: 1.5em;
     }
 
     .hero-buttons {
