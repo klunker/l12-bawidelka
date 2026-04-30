@@ -816,7 +816,7 @@ main {
     color: var(--color-gray-500);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 825px) {
     .hero {
         align-items: center;
         padding: 50vh 0 35px;
@@ -852,13 +852,12 @@ main {
         .hero-container {
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            padding: 0 15px;
+            padding: 2rem;
             text-align: left;
         }
 
         .hero-content {
             text-align: left;
-            background: red;
         }
 
         h1 {
