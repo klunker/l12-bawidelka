@@ -2,8 +2,8 @@
 
 namespace App\Helpers;
 
-use App\Filament\Blocks\TlistBlock;
 use App\Filament\Blocks\ButtonBlock;
+use App\Filament\Blocks\TlistBlock;
 use Filament\Forms\Components\RichEditor\RichContentRenderer;
 
 class RichContentRendererHelper

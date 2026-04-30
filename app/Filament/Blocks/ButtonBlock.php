@@ -3,9 +3,9 @@
 namespace App\Filament\Blocks;
 
 use Filament\Actions\Action;
+use Filament\Forms\Components\RichEditor\RichContentCustomBlock;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\RichEditor\RichContentCustomBlock;
 
 class ButtonBlock extends RichContentCustomBlock
 {
@@ -74,8 +74,8 @@ class ButtonBlock extends RichContentCustomBlock
 
         return <<<HTML
             <div class="custom-button-wrapper" data-button="true">
-                <a href="{$url}" 
-                   class="inline-flex items-center justify-center px-4 py-2 bg-mint-600 text-white font-medium rounded-full hover:bg-mint-700 focus:outline-none focus:ring-2 focus:ring-mint-500 focus:ring-offset-2 transition-colors duration-200" 
+                <a href="{$url}"
+                   class="inline-flex items-center justify-center px-4 py-2 bg-mint-600 text-white font-medium rounded-full hover:bg-mint-700 focus:outline-none focus:ring-2 focus:ring-mint-500 focus:ring-offset-2 transition-colors duration-200"
                    target="{$target}"
                    {$relAttr}>
                     {$text}

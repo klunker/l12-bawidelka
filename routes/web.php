@@ -19,6 +19,4 @@ Route::get('/dashboard', function () {
 
 Route::get('/p/{slug}', [PageController::class, 'show'])->name('page');
 
-
-
 require __DIR__.'/settings.php';

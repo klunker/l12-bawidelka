@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Blocks\TlistBlock;
 use App\Filament\Blocks\ButtonBlock;
+use App\Filament\Blocks\TlistBlock;
 use App\Filament\Resources\ServiceResource\Pages;
 use App\Models\Service;
 use Filament\Actions\BulkActionGroup;
