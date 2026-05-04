@@ -44,6 +44,22 @@
 </head>
 <body class="font-sans antialiased">
 @inertia
-{!! CookieConsent::scripts() !!}
+{!! preg_replace('/<script[^>]*><\/script>/', '', CookieConsent::scripts()) !!}
+<script>
+    // Defer cookie consent scripts to reduce forced reflows
+    window.addEventListener('load', function() {
+        requestIdleCallback(function() {
+            const scriptJs = document.createElement('script');
+            scriptJs.src = '/vendor/devrabiul/laravel-cookie-consent/js/script.js';
+            scriptJs.defer = true;
+            document.body.appendChild(scriptJs);
+
+            const scriptUtils = document.createElement('script');
+            scriptUtils.src = '/laravel-cookie-consent/script-utils';
+            scriptUtils.defer = true;
+            document.body.appendChild(scriptUtils);
+        });
+    });
+</script>
 </body>
 </html>

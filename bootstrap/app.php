@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AddCacheHeadersForStaticAssets;
 use App\Http\Middleware\DisableRoutes;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -22,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleAppearance::class,
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
+            AddCacheHeadersForStaticAssets::class,
         ]);
 
         $middleware->alias([
