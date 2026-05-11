@@ -29,6 +29,13 @@ const FooterSection: React.FC<FooterSectionProps> = ({ cities }) => {
         { href: '/p/regulamin', label: 'Regulamin' },
         { href: '/p/rodo', label: 'RODO' },
         { href: '/p/privacy-settings', label: 'Ustawienia prywatności' },
+        {
+            href: '#cookie-consent',
+            label: 'Ustawienia cookies',
+            action: () => {
+                window.LaravelCookieConsent.reset();
+            },
+        },
     ];
 
     return (

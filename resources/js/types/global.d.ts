@@ -10,3 +10,14 @@ declare module '@inertiajs/core' {
         };
     }
 }
+
+declare global {
+    interface Window {
+        LaravelCookieConsent: {
+            acceptAll(): void;
+            acceptEssentials(): void;
+            configure(data: unknown): void;
+            reset(): void;
+        };
+    }
+}

@@ -19,8 +19,6 @@
         })();
     </script>
 
-    {!! CookieConsent::styles() !!}
-
     {{-- Inline style to set the HTML background color based on our theme in app.css --}}
     <style>
         html {
@@ -36,7 +34,7 @@
 
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="/bawidelka.png">
-
+    @cookieconsentscripts
 
     @viteReactRefresh
     @vite(['resources/js/app.tsx', "resources/scss/Theme.scss","resources/js/pages/{$page['component']}.tsx"])
@@ -44,22 +42,6 @@
 </head>
 <body class="font-sans antialiased">
 @inertia
-{!! preg_replace('/<script[^>]*><\/script>/', '', CookieConsent::scripts()) !!}
-<script>
-    // Defer cookie consent scripts to reduce forced reflows
-    window.addEventListener('load', function() {
-        requestIdleCallback(function() {
-            const scriptJs = document.createElement('script');
-            scriptJs.src = '/vendor/devrabiul/laravel-cookie-consent/js/script.js';
-            scriptJs.defer = true;
-            document.body.appendChild(scriptJs);
-
-            const scriptUtils = document.createElement('script');
-            scriptUtils.src = '/laravel-cookie-consent/script-utils';
-            scriptUtils.defer = true;
-            document.body.appendChild(scriptUtils);
-        });
-    });
-</script>
+@cookieconsentview
 </body>
 </html>

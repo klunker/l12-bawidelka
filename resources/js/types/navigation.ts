@@ -16,6 +16,7 @@ export type NavItem = {
 export type NavLink = {
     href: string;
     label: string;
+    action?: () => void;
 };
 
 export interface NavLinksProps {

@@ -8,6 +8,7 @@ export const NavLinks = ({ links, className }: NavLinksProps) => (
             <li key={link.href}>
                 <Link
                     href={link.href}
+                    onClick={link.action || undefined}
                     className="text-sm font-medium text-gray-600 transition-colors duration-200 hover:text-brown-500"
                 >
                     {link.label}
