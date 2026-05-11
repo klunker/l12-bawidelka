@@ -116,8 +116,12 @@ class ServiceResource extends Resource
                             ->directory('services')
                             ->visibility('public'),
                         FileUpload::make('headerImage')
-                            ->label(__('filament.labels.header_image'))
+                            ->label(__('filament.labels.header_image').'(16/9)')
                             ->image()
+                            ->imageEditor()
+                            ->imageAspectRatio(['16/9'])
+                            ->automaticallyOpenImageEditorForAspectRatio(true)
+                            ->imageEditorAspectRatioOptions(['16/9'])
                             ->acceptedFileTypes(['image/*'])
                             ->nullable()
                             ->disk('public')

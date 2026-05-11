@@ -2,8 +2,11 @@
 
 namespace App\Filament\Resources\ServiceResource\Pages;
 
+use App\Enums\ServiceCacheKey;
 use App\Filament\Resources\ServiceResource;
+use App\Jobs\OptimizeServiceImages;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Support\Facades\Cache;
 
 class CreateService extends CreateRecord
 {
@@ -11,6 +14,11 @@ class CreateService extends CreateRecord
 
     protected function afterCreate(): void
     {
-        // Logic to execute after the record is created
+        Cache::delete(ServiceCacheKey::ACTIVE->value);
+
+        // Dispatch image optimization job if images were uploaded
+        if ($this->record->image || $this->record->headerImage) {
+            OptimizeServiceImages::dispatch($this->record);
+        }
     }
 }

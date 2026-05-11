@@ -46,6 +46,7 @@ export function OptimizedImage({
                 objectFit: 'cover',
                 width: '100%',
                 height: height ? `${height}px` : 'auto',
+                aspectRatio:16 / 9,
             }}
         />
         </Inset>

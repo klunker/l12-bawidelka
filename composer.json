@@ -16,6 +16,7 @@
         "filament/forms": "^5.0",
         "filament/schemas": "^5.0",
         "inertiajs/inertia-laravel": "^v2.0",
+        "intervention/image": "^4.0",
         "laravel/fortify": "^v1.35.0",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",

@@ -29,11 +29,10 @@ export default function TripTemplate({ service }: TemplateProps) {
             </div>
 
             {/* Hero image with title overlay */}
-            <div className="rounded-0 relative mx-auto h-80 max-w-6xl overflow-hidden sm:h-96 md:h-[480px] md:rounded-4xl">
+            <div className="rounded-0 relative mx-auto aspect-video max-w-6xl overflow-hidden md:rounded-4xl">
                 <OptimizedImage
                     src={service.header_image_url}
                     alt={service.title}
-                    height={500}
                     width={1200}
                     className="object-cover object-center"
                     priority
