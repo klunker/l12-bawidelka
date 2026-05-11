@@ -34,6 +34,7 @@ export default function TripTemplate({ service }: TemplateProps) {
                     src={service.header_image_url}
                     alt={service.title}
                     width={1200}
+                    aspectRatio={'16/9'}
                     className="object-cover object-center"
                     priority
                 />

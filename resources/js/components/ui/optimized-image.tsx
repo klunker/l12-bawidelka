@@ -12,6 +12,7 @@ interface OptimizedImageProps {
     priority?: boolean;
     quality?: number;
     sizes?: string;
+    aspectRatio?: string;
 }
 
 /**
@@ -26,7 +27,9 @@ export function OptimizedImage({
     height,
     className,
     sizes,
+    aspectRatio
 }: OptimizedImageProps) {
+    console.log('aspectRatio:', aspectRatio);
     // Default sizes for responsive images when using fill
     const defaultSizes = fill
         ? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -46,7 +49,7 @@ export function OptimizedImage({
                 objectFit: 'cover',
                 width: '100%',
                 height: height ? `${height}px` : 'auto',
-                aspectRatio:16 / 9,
+                aspectRatio: aspectRatio ? aspectRatio : 'auto',
             }}
         />
         </Inset>
