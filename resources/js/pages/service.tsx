@@ -44,33 +44,33 @@ export default function ServicePage({
         );
     }, [Service.template]);
 
-    useEffect(() => {
-        const scrollKey = `serviceScrollPosition_${Service.id}`;
-        const scrollY = localStorage.getItem(scrollKey);
-
-        if (scrollY) {
-            requestAnimationFrame(() => {
-                window.scrollTo(0, parseInt(scrollY, 10));
-                localStorage.removeItem(scrollKey);
-            });
-        }
-
-        const handleScroll = () => {
-            localStorage.setItem(scrollKey, window.scrollY.toString());
-        };
-
-        const handleBeforeUnload = () => {
-            localStorage.setItem(scrollKey, window.scrollY.toString());
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('beforeunload', handleBeforeUnload);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, [Service.id]);
+    // useEffect(() => {
+    //     const scrollKey = `serviceScrollPosition_${Service.id}`;
+    //     const scrollY = localStorage.getItem(scrollKey);
+    //
+    //     if (scrollY) {
+    //         requestAnimationFrame(() => {
+    //             window.scrollTo(0, parseInt(scrollY, 10));
+    //             localStorage.removeItem(scrollKey);
+    //         });
+    //     }
+    //
+    //     const handleScroll = () => {
+    //         localStorage.setItem(scrollKey, window.scrollY.toString());
+    //     };
+    //
+    //     const handleBeforeUnload = () => {
+    //         localStorage.setItem(scrollKey, window.scrollY.toString());
+    //     };
+    //
+    //     window.addEventListener('scroll', handleScroll);
+    //     window.addEventListener('beforeunload', handleBeforeUnload);
+    //
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //         window.removeEventListener('beforeunload', handleBeforeUnload);
+    //     };
+    // }, [Service.id]);
 
     return (
         <>
