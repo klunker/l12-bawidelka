@@ -45,40 +45,22 @@ export default function ServicePage({
     }, [Service.template]);
 
     useEffect(() => {
-        // Восстанавливаем позицию скролла при монтировании
-        const scrollY = localStorage.getItem('serviceScrollPosition');
+        const scrollKey = `serviceScrollPosition_${Service.id}`;
+        const scrollY = localStorage.getItem(scrollKey);
+
         if (scrollY) {
             requestAnimationFrame(() => {
                 window.scrollTo(0, parseInt(scrollY, 10));
-
-                setTimeout(() => {
-                    const currentScroll = window.scrollY;
-                    const targetScroll = parseInt(scrollY, 10);
-
-                    if (currentScroll === targetScroll) {
-                        localStorage.removeItem('serviceScrollPosition');
-                    } else {
-                        setTimeout(() => {
-                            window.scrollTo(0, targetScroll);
-                            console.log('Second attempt to apply scroll');
-                        }, 200);
-                    }
-                }, 200);
+                localStorage.removeItem(scrollKey);
             });
         }
 
         const handleScroll = () => {
-            localStorage.setItem(
-                'serviceScrollPosition',
-                window.scrollY.toString(),
-            );
+            localStorage.setItem(scrollKey, window.scrollY.toString());
         };
 
         const handleBeforeUnload = () => {
-            localStorage.setItem(
-                'serviceScrollPosition',
-                window.scrollY.toString(),
-            );
+            localStorage.setItem(scrollKey, window.scrollY.toString());
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -88,7 +70,7 @@ export default function ServicePage({
             window.removeEventListener('scroll', handleScroll);
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-    }, []);
+    }, [Service.id]);
 
     return (
         <>
