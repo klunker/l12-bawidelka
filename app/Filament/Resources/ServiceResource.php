@@ -128,6 +128,7 @@ class ServiceResource extends Resource
                             ->rules(fn () => [
                                 'image', 'nullable',
                             ])
+                            ->nullable()
                             ->disk('public')
                             ->directory('services/headers')
                             ->visibility('public'),
