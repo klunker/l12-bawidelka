@@ -114,6 +114,9 @@ class ServiceResource extends Resource
                             ->imageAspectRatio('2:3')
                             ->automaticallyOpenImageEditorForAspectRatio()
                             ->acceptedFileTypes(['image/*'])
+                            ->rules(fn () => [
+                                'image', 'nullable',
+                            ])
                             ->nullable()
                             ->disk('public')
                             ->directory('services')
