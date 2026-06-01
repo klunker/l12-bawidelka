@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/empty';
 import { OptimizedImage } from '@/components/ui/optimized-image';
 import type { City, Service } from '@/types/models';
+import { useSelectedCityId } from '@/hooks/use-selected-city-id.tsx';
 
 interface ServiceSectionContentProps {
     services: Array<Service>;
@@ -20,44 +21,22 @@ const ServiceSectionContent: React.FC<ServiceSectionContentProps> = ({
     services,
     cities,
 }) => {
-    const [selectedCityId, setSelectedCityId] = useState<number | null>(() => {
-        if (typeof window === 'undefined') return null;
-
-        const getCookie = (name: string) => {
-            const match = document.cookie.match(
-                new RegExp('(^| )' + name + '=([^;]+)'),
-            );
-            if (match) return match[2];
-            return null;
-        };
-
-        const savedCityId = getCookie('selectedCityId');
-
-        if (!savedCityId) {
-            document.cookie = `selectedCityId=1; path=/; max-age=${60 * 60 * 24 * 30}`;
-            return 1;
-        }
-
-        return parseInt(savedCityId, 10);
-    });
-
+    const { selectedCityId, setSelectedCityId } = useSelectedCityId();
+    const [filteredServices, setFilteredServices] =
+        useState<Service[]>(services);
     const handleCityChange = (cityId: number) => {
         setSelectedCityId(cityId);
     };
 
-    // Save to cookie when city changes
     useEffect(() => {
-        if (selectedCityId) {
-            document.cookie = `selectedCityId=${selectedCityId}; path=/; max-age=${60 * 60 * 24 * 30}`; // 30 days
-        }
-    }, [selectedCityId]);
-
-    const filteredServices = services.filter((service) => {
-        if (selectedCityId === null) return true;
-        return service.cities?.some(
-            (city) => Number(city.id) === selectedCityId,
-        );
-    });
+        const filteredServices = services.filter((service) => {
+            if (selectedCityId === null) return true;
+            return service.cities?.some(
+                (city) => Number(city.id) === selectedCityId,
+            );
+        });
+        setFilteredServices(filteredServices);
+    }, [selectedCityId, services]);
 
     // If there are no services to display
     if (services.length === 0) {
