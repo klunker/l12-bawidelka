@@ -111,7 +111,7 @@ class ServiceResource extends Resource
                             ->label(__('filament.labels.image'))
                             ->image()
                             ->imageEditor()
-                            ->imageAspectRatio('2:3')
+                            ->imageAspectRatio('1:1.22')
                             ->automaticallyOpenImageEditorForAspectRatio()
                             ->acceptedFileTypes(['image/*'])
                             ->rules(fn () => [
