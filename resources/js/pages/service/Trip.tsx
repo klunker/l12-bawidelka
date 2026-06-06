@@ -44,11 +44,11 @@ export default function TripTemplate({ service }: TemplateProps) {
                 {/* Title on image */}
                 <div className="absolute right-0 bottom-0 left-0 p-6 sm:p-10">
                     <div className="mx-auto max-w-5xl">
-                        <h1 className="text-4xl! font-bold text-white! md:text-6xl!">
+                        <h1 className="text-3xl! font-bold text-white! md:text-6xl!">
                             {service.title}
                         </h1>
                         {service.sub_title && (
-                            <p className="mt-2 text-3xl text-white/80">
+                            <p className="mt-1.5 text-2xl text-white/80">
                                 {service.sub_title}
                             </p>
                         )}
