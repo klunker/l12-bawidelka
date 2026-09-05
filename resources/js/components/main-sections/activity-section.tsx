@@ -134,7 +134,7 @@ const ActivityCard: React.FC<{ activity: Activity }> = ({ activity }) => {
                         {activity.name}
                     </h3>
                     <p className="text-sm">
-                        Max illość osób: {activity.maxChildren} osób
+                        Maksymalna ilość osób: {activity.maxChildren}
                     </p>
                 </div>
 
