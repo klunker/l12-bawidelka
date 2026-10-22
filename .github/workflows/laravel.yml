@@ -53,25 +53,6 @@ jobs:
             - name: Build Assets
               run: vp build
 
-            - name: Get Playwright version
-              id: playwright-version
-              run: echo "version=$(node -p "((require('./package.json').devDependencies || {})['@playwright/test'] || (require('./package.json').dependencies || {})['@playwright/test'] || 'latest')")" >> $GITHUB_OUTPUT
-
-            - name: Cache Playwright Browsers
-              uses: actions/cache@v4
-              id: playwright-cache
-              with:
-                  path: ~/.cache/ms-playwright
-                  key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
-
-            - name: Install Playwright Browsers
-              if: steps.playwright-cache.outputs.cache-hit != 'true'
-              run: vp exec playwright install --with-deps
-
-            - name: Install Playwright System Dependencies
-              if: steps.playwright-cache.outputs.cache-hit == 'true'
-              run: vp exec playwright install-deps
-
             - name: Cache Rector
               uses: actions/cache@v4
               with:
@@ -93,10 +74,3 @@ jobs:
               run: composer test
               env:
                   APP_ENV: testing
-
-            - name: Store Artifacts
-              if: failure()
-              uses: actions/upload-artifact@v7
-              with:
-                  name: browser-screenshots
-                  path: tests/Browser/Screenshots
