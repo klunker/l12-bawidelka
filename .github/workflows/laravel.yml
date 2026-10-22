@@ -50,7 +50,7 @@ jobs:
               run: php artisan key:generate
 
             - name: Install Bun Dependencies
-              run: bun install
+              run: bun x vp install
 
             - name: Build Assets
               run: bun run build
