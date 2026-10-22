@@ -14,8 +14,8 @@ git pull origin master
 composer install --no-dev --optimize-autoloader --no-interaction
 
 # 4. Frontend
-bun x vp install
-bun run build
+pnpm install --frozen-lockfile
+pnpm run build
 
 # 5. Database migrations
 
