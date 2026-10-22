@@ -35,10 +35,14 @@ jobs:
                   tools: composer:v2
                   coverage: xdebug
 
-            - name: Setup Bun
-              uses: oven-sh/setup-bun@v2
+            - name: Setup Node
+              uses: actions/setup-node@v4
               with:
-                  bun-version: latest
+                  node-version: 22
+                  cache: 'pnpm'
+
+            - name: Enable pnpm
+              run: corepack enable && corepack prepare pnpm@10.32.1 --activate
 
             - name: Install Dependencies
               run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-progress --no-scripts
@@ -49,18 +53,18 @@ jobs:
             - name: Generate Application Key
               run: php artisan key:generate
 
-            - name: Install Bun Dependencies
-              run: bun install
+            - name: Install Node Dependencies
+              run: pnpm install --frozen-lockfile
 
             - name: Align Vite+ Versions
-              run: ./node_modules/.bin/vp migrate
+              run: pnpm exec vp migrate
 
             - name: Build Assets
-              run: bun run build
+              run: pnpm run build
 
             - name: Get Playwright version
               id: playwright-version
-              run: echo "version=$(bun pm ls | grep @playwright/test | sed 's/.*@//')" >> $GITHUB_OUTPUT
+              run: echo "version=$(node -p "((require('./package.json').devDependencies || {})['@playwright/test'] || (require('./package.json').dependencies || {})['@playwright/test'] || 'latest')")" >> $GITHUB_OUTPUT
 
             - name: Cache Playwright Browsers
               uses: actions/cache@v4
@@ -71,11 +75,11 @@ jobs:
 
             - name: Install Playwright Browsers
               if: steps.playwright-cache.outputs.cache-hit != 'true'
-              run: bunx playwright install --with-deps
+              run: pnpm exec playwright install --with-deps
 
             - name: Install Playwright System Dependencies
               if: steps.playwright-cache.outputs.cache-hit == 'true'
-              run: bunx playwright install-deps
+              run: pnpm exec playwright install-deps
 
             - name: Cache Rector
               uses: actions/cache@v4
